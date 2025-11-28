@@ -27,13 +27,11 @@
   <!-- Dynamic Coffee Message -->
   <div id="greeting" class="greeting"></div>
 
-  <!-- Hero Section (original GIF embed) -->
+  <!-- Hero Section -->
   <section class="hero">
     <iframe src="https://giphy.com/embed/l0ExfWRJVNj6CgKAM" 
-      width="480" height="262" 
-      style="border:none;" 
       class="hero-gif" 
-      allowFullScreen>
+      frameBorder="0" allowFullScreen>
     </iframe>
     <div class="hero-text">
       <h2>Discover Your Perfect Coffee Bean</h2>
@@ -45,22 +43,42 @@
   <section class="products">
     <h2>Discover Our Products</h2>
     <div class="product-grid">
-      <div class="product">Espresso Blend</div>
-      <div class="product">Light Roast</div>
-      <div class="product">Medium Roast</div>
-      <div class="product">Dark Roast</div>
-      <div class="product">Colombian Beans</div>
-      <div class="product">Ethiopian Beans</div>
-      <div class="product">Single Origin</div>
-      <div class="product">Decaf</div>
-      <div class="product">French Press</div>
-      <div class="product">Cold Brew</div>
-      <div class="product">Coffee Pods</div>
-      <div class="product">Flavored Coffee</div>
-      <div class="product">Organic Beans</div>
-      <div class="product">Holiday Blend</div>
-      <div class="product">Limited Edition</div>
-      <div class="product">Gift Pack</div>
+      <div class="product">
+        <img src="https://via.placeholder.com/300x300?text=Espresso" alt="Espresso Blend">
+        <div class="product-overlay">Espresso Blend</div>
+      </div>
+      <div class="product">
+        <img src="https://via.placeholder.com/300x300?text=Light+Roast" alt="Light Roast">
+        <div class="product-overlay">Light Roast</div>
+      </div>
+      <div class="product">
+        <img src="https://via.placeholder.com/300x300?text=Medium+Roast" alt="Medium Roast">
+        <div class="product-overlay">Medium Roast</div>
+      </div>
+      <div class="product">
+        <img src="https://via.placeholder.com/300x300?text=Dark+Roast" alt="Dark Roast">
+        <div class="product-overlay">Dark Roast</div>
+      </div>
+      <div class="product">
+        <img src="https://via.placeholder.com/300x300?text=Colombian" alt="Colombian Beans">
+        <div class="product-overlay">Colombian Beans</div>
+      </div>
+      <div class="product">
+        <img src="https://via.placeholder.com/300x300?text=Ethiopian" alt="Ethiopian Beans">
+        <div class="product-overlay">Ethiopian Beans</div>
+      </div>
+      <div class="product">
+        <img src="https://via.placeholder.com/300x300?text=Single+Origin" alt="Single Origin">
+        <div class="product-overlay">Single Origin</div>
+      </div>
+      <div class="product">
+        <img src="https://via.placeholder.com/300x300?text=Decaf" alt="Decaf">
+        <div class="product-overlay">Decaf</div>
+      </div>
+      <div class="product">
+        <img src="https://via.placeholder.com/300x300?text=French+Press" alt="French Press">
+        <div class="product-overlay">French Press</div>
+      </div>
     </div>
   </section>
 
@@ -77,15 +95,22 @@
     const localTimeString = now.toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});
 
     const messages = [
-      "Early hours? A warm, comforting decaf keeps you cozy.",     // 0-4
-      "Rise and grind! A strong espresso will kickstart your day.",// 5-6
-      "Good morning! Perfect time for a smooth medium roast.",    // 7
-      "Coffee o’clock! A light roast keeps you alert.",            // 8-9
-      "Late morning boost? Try a balanced blend.",                // 10-11
-      "Lunch break coffee? A medium roast hits the spot.",        // 12
-      "Afternoon slump? A bold espresso keeps you sharp.",        // 13-14
-      "Coffee pause! Light roast to refresh your afternoon.",     // 15-16
-      "Evening’s here. Treat yourself to a cozy decaf.",          // 17
-      `It's ${localTimeString}. Perfect time for a decaf latte.`, // 18-19
-      "Night owl? Enjoy a gentle decaf before bedtime.",          // 20-21
-      "Lat
+      "Early hours? A warm, comforting decaf keeps you cozy.",     
+      "Rise and grind! A strong espresso will kickstart your day.",
+      "Good morning! Perfect time for a smooth medium roast.",    
+      "Coffee o’clock! A light roast keeps you alert.",            
+      "Late morning boost? Try a balanced blend.",                
+      "Lunch break coffee? A medium roast hits the spot.",        
+      "Afternoon slump? A bold espresso keeps you sharp.",        
+      "Coffee pause! Light roast to refresh your afternoon.",     
+      "Evening’s here. Treat yourself to a cozy decaf.",          
+      `It's ${localTimeString}. Perfect time for a decaf latte.`, 
+      "Night owl? Enjoy a gentle decaf before bedtime.",          
+      "Late night? Herbal coffee is your friend."
+    ];
+
+    greetingEl.textContent = messages[hour];
+  </script>
+
+</body>
+</html>
