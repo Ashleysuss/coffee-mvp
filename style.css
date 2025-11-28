@@ -55,11 +55,11 @@ a {
   max-width: 600px;
 }
 
-.hero-image {
+.hero-gif {
   width: 100%;
   height: auto;
   border-radius: 10px;
-  object-fit: cover;
+  display: block;
 }
 
 .hero-text {
