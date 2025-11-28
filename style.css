@@ -1,46 +1,45 @@
 /* --- Reset & Base --- */
 * { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: 'Helvetica Neue', Arial, sans-serif; background: #FFF8F0; color: #3a3a3a; }
+body { font-family: 'Helvetica Neue', Arial, sans-serif; background: #FFF8F0; color: #3a3a3a; line-height: 1.5; }
 
-/* --- T-Bar --- */
+/* --- T-Bar (mobile-first) --- */
 .t-bar {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: center;
   padding: 0.5rem 1rem;
   background: #D9A066; /* Light roast coffee tone */
   color: #fff;
 }
 
+.nav-left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
 .t-bar a {
   color: #fff;
   font-size: 14px;
-  margin-right: 1.5rem;
   text-decoration: none;
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  margin: 0.25rem 0;
 }
 
-.nav-left { display: flex; align-items: center; }
-
-.logo {
-  text-align: center;
-  font-size: 24px;
-  flex: 1;
-}
+.logo { font-size: 24px; margin-bottom: 0.5rem; }
 
 /* --- Hero Section --- */
 .hero {
   position: relative;
   text-align: center;
-  margin-top: 1rem;
 }
 
 .hero img {
   width: 100%;
-  max-height: 500px;
-  object-fit: cover;
+  height: auto;
   border-radius: 10px;
 }
 
@@ -53,7 +52,7 @@ body { font-family: 'Helvetica Neue', Arial, sans-serif; background: #FFF8F0; co
 }
 
 .hero-text h2 {
-  font-size: 2rem;
+  font-size: 1.5rem;
   margin-bottom: 1rem;
   text-shadow: 2px 2px 8px rgba(0,0,0,0.6);
 }
@@ -70,6 +69,7 @@ body { font-family: 'Helvetica Neue', Arial, sans-serif; background: #FFF8F0; co
   letter-spacing: 0.5px;
   cursor: pointer;
   white-space: nowrap;
+  width: 80%; /* mobile full width */
   transition: transform 0.2s, background 0.3s;
 }
 
@@ -81,26 +81,24 @@ body { font-family: 'Helvetica Neue', Arial, sans-serif; background: #FFF8F0; co
 /* --- Products Section --- */
 .products {
   text-align: center;
-  padding: 3rem 1rem;
+  padding: 2rem 1rem;
 }
 
 .products h2 {
-  font-size: 2rem;
+  font-size: 1.5rem;
   color: #6b4f4f;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
 }
 
 .product-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 1.5rem;
-  max-width: 1200px;
-  margin: 0 auto;
+  grid-template-columns: 1fr; /* mobile first: single column */
+  gap: 1rem;
 }
 
 .product {
   background: #FFF3E0;
-  padding: 1.5rem;
+  padding: 1rem;
   border-radius: 5px;
   font-weight: 500;
   box-shadow: 0 4px 12px rgba(0,0,0,0.08);
@@ -108,23 +106,33 @@ body { font-family: 'Helvetica Neue', Arial, sans-serif; background: #FFF8F0; co
   cursor: pointer;
 }
 
-.product:hover { transform: translateY(-5px); }
+.product:hover { transform: translateY(-3px); }
 
 /* --- Footer --- */
 footer {
   text-align: center;
-  padding: 2rem 1rem;
-  background: #D9A066; /* Same as T-bar */
+  padding: 1.5rem 1rem;
+  background: #D9A066;
   color: #fff;
   font-size: 0.9rem;
   font-weight: 500;
 }
 
-/* --- Responsive --- */
-@media (max-width: 600px) {
-  .t-bar { flex-direction: column; }
-  .nav-left { margin-bottom: 0.5rem; }
-  .hero-text h2 { font-size: 1.5rem; }
-  .hero-text .button { width: 80%; }
-  .product-grid { grid-template-columns: 1fr 1fr; }
+/* --- Desktop / larger screens --- */
+@media (min-width: 768px) {
+  .t-bar {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .nav-left {
+    flex-direction: row;
+    margin-bottom: 0;
+  }
+  .t-bar a { margin: 0 1rem 0 0; }
+  .logo { margin: 0; }
+  .hero-text h2 { font-size: 2rem; }
+  .hero-text .button { width: auto; }
+  .product-grid { grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+  .product { padding: 1.5rem; }
 }
