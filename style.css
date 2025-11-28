@@ -15,9 +15,10 @@ a {
 /* T-Bar */
 .t-bar {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
-  background: #DAB785;
+  background: #C8A97E;
   padding: 0.5rem 1rem;
   position: sticky;
   top: 0;
@@ -122,13 +123,14 @@ a {
   border-radius: 5px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
   font-weight: 500;
+  text-align: center;
 }
 
 /* Footer */
 footer {
   text-align: center;
   padding: 1rem;
-  background: #DAB785;
+  background: #C8A97E;
   margin-top: 2rem;
 }
 
