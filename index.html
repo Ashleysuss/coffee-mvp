@@ -1,204 +1,153 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Origin Espresso – Coffee Finder</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Origin Espresso – Better Coffee, Matched</title>
+  <link href="https://fonts.googleapis.com/css2?family=PP+Mori:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>Coffee</text></svg>">
 </head>
 <body>
 
-<header class="t-bar">
-  <nav class="nav-left" aria-label="Main">
-    <a href="#about">About</a>
-    <a href="#shop">Shop</a>
-    <a href="#gifting">Gifting</a>
-    <a href="#subscription">Subscription</a>
-  </nav>
-  <div class="logo" aria-hidden="true"><h1>☕</h1></div>
-</header>
+  <!-- Top bar -->
+  <header class="t-bar">
+    <nav class="nav-left">
+      <a href="#about">About</a>
+      <a href="#shop">Shop</a>
+      <a href="#gifting">Gifting</a>
+      <a href="#subscription">Subscription</a>
+    </nav>
+    <div class="logo">Origin Espresso</div>
+  </header>
 
-<!-- Dynamic greeting -->
-<div id="greeting" class="greeting" aria-live="polite">Loading personalised greeting…</div>
-
-<script>
-// Dynamic greeting script (unchanged)
-(async function() {
-  const greetingEl = document.getElementById('greeting');
-  let city = 'your city';
-  try {
-    const resp = await fetch('https://ipapi.co/json/');
-    if (resp.ok) {
-      const data = await resp.json();
-      city = data.city || city;
-    }
-  } catch (e) {}
-  const now = new Date();
-  const hour = now.getHours();
-  const localTime = now.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});
-  const jokes = {
-    decaf: [
-      `Late in ${city}? Decaf's on — even your dreams need a good night's rest.`,
-      `It's after 6pm in ${city}. Put the rocket fuel away — decaf latte time.`,
-      `Even the moon in ${city} prefers decaf. You might too.`
-    ],
-    morning: [
-      `Buongiorno ${city}! Italians say milk coffees are a morning-only negotiation — cappuccino before noon, always.`,
-      `Good morning, ${city}. If you're feeling Italian, a milky cappuccino is socially acceptable before noon.`,
-      `Morning in ${city} — milk coffee is breakfast diplomacy. Cappuccino? Go for it.`
-    ],
-    day: [
-      `Hello ${city}! A balanced medium roast will keep you happy and slightly heroic.`,
-      `It's ${localTime} in ${city}. Consider a bright filter roast to make spreadsheets taste better.`,
-      `Hey ${city} — bold espresso for focused scenes, medium roast for friendly chats.`
-    ]
-  };
-  let message = '';
-  if (hour >= 18 || hour < 5) message = jokes.decaf[Math.floor(Math.random() * jokes.decaf.length)];
-  else if (hour < 12) message = jokes.morning[Math.floor(Math.random() * jokes.morning.length)];
-  else message = jokes.day[Math.floor(Math.random() * jokes.day.length)];
-
-  let tip = '';
-  if (hour < 12) tip = 'Tip: Italians generally avoid milk coffees after lunch — but you do you.';
-  else if (hour >= 18) tip = `Tip: Try a decaf with warm milk — it's sneaky comfort.`;
-  else tip = `Tip: Try matching roast to your brew method (V60 -> light; Espresso -> richer).`;
-
-  greetingEl.innerHTML = `<strong>${message}</strong> <span class="greeting-tip">${tip}</span>`;
-})();
-</script>
-
-<!-- HERO -->
-<section class="hero">
-  <img src="Assets/1_12_25Hero.jpg" alt="Pouring coffee" class="hero-gif" />
-  <div class="hero-overlay" aria-hidden="true"></div>
-  <div class="hero-text" role="region" aria-label="Hero">
-    <h2>Time for a personalised experience</h2>
-    <p class="lede">Curated Melbourne beans, tailored to your taste.</p>
-    <a class="button" href="quiz.html">Start Quiz</a>
+  <!-- Greeting -->
+  <div id="greeting" class="greeting" aria-live="polite">
+    <strong>Working out what you actually like…</strong>
+    <span class="tip">One moment.</span>
   </div>
-</section>
 
-<!-- HOW IT WORKS -->
-<section class="how-it-works" id="about">
-  <h2>How it works</h2>
-
-  <div class="hiw-assets">
-    <div class="asset tile">
-      <div class="asset-emoji">📝</div>
-      <div class="asset-title">Take the Quiz</div>
-      <div class="asset-sub">60 seconds to your taste profile</div>
+  <!-- Hero -->
+  <section class="hero">
+    <img src="Assets/1_12_25Hero.jpg" alt="Pouring coffee" class="hero-img" loading="lazy" />
+    <div class="hero-content">
+      <h1>Good coffee shouldn’t be guesswork</h1>
+      <p class="lede">60-second quiz. Melbourne’s best independent roasters. Beans that actually suit you.</p>
+      <a href="quiz.html" class="btn-primary">Start the Quiz</a>
     </div>
+  </section>
 
-    <div class="asset tile">
-      <div class="asset-emoji">⚙️</div>
-      <div class="asset-title">We build your profile</div>
-      <div class="asset-sub">Rules + tasting science + behaviour</div>
+  <!-- How it works -->
+  <section class="how-it-works" id="about">
+    <h2>How it works</h2>
+    <div class="tiles">
+      <div class="tile">
+        <div class="emoji">Quiz</div>
+        <h3>60-second quiz</h3>
+        <p>Your taste. Your brew method. Your rules.</p>
+      </div>
+      <div class="tile">
+        <div class="emoji">Brain</div>
+        <h3>We build your profile</h3>
+        <p>Flavour science + real data</p>
+      </div>
+      <div class="tile">
+        <div class="emoji">Bean</div>
+        <h3>Perfect matches</h3>
+        <p>Fresh beans from Melbourne’s best roasters</p>
+      </div>
     </div>
+  </section>
 
-    <div class="asset tile">
-      <div class="asset-emoji">📦</div>
-      <div class="asset-title">Get your matches</div>
-      <div class="asset-sub">Curated local beans, fresh from roasters</div>
-    </div>
-  </div>
-</section>
-
-<!-- PRODUCTS -->
-<section class="products" id="shop" aria-label="Featured beans">
-  <div class="products-inner">
-    <h2>We think you'll love these</h2>
-    <div class="product-carousel" role="region" aria-label="Product carousel">
-      <button class="carousel-btn prev" aria-label="Previous slide">&#10094;</button>
-      <div class="carousel-window">
+  <!-- Carousel -->
+  <section class="featured" id="shop">
+    <h2>Roasts we think you’ll actually like</h2>
+    <div class="carousel">
+      <button class="carousel-btn prev" aria-label="Previous slide">&larr;</button>
+      <button class="carousel-btn next" aria-label="Next slide">&rarr;</button>
+      <div class="carousel-track-container">
         <div class="carousel-track">
-          <div class="product"><img src="Assets/2_12_25_Product2.gif" alt="Espresso"><div class="overlay">Espresso Blend</div></div>
-          <div class="product"><img src="Assets/2_12_25_Product3.gif" alt="Light Roast"><div class="overlay">Light Roasts</div></div>
-          <div class="product"><img src="Assets/2_12_25_Product1.gif" alt="Medium Roast"><div class="overlay">Medium Roast</div></div>
-          <div class="product"><img src="Assets/2_12_25_Product4.gif" alt="Dark Roast"><div class="overlay">Dark Roast</div></div>
-          <div class="product"><img src="https://media.giphy.com/media/hPFKu8dKRRNgQ/giphy.gif" alt="Colombian"><div class="overlay">Colombian Beans</div></div>
-          <div class="product"><img src="https://media.giphy.com/media/hPFKu8dKRRNgQ/giphy.gif" alt="Ethiopian"><div class="overlay">Ethiopian Beans</div></div>
+          <div class="card"><img src="Assets/2_12_25_Product2.gif" alt="Espresso"><div class="label">Espresso Blend</div></div>
+          <div class="card"><img src="Assets/2_12_25_Product3.gif" alt="Light"><div class="label">Light Roast</div></div>
+          <div class="card"><img src="Assets/2_12_25_Product1.gif" alt="Medium"><div class="label">Medium Roast</div></div>
+          <div class="card"><img src="Assets/2_12_25_Product4.gif" alt="Dark"><div class="label">Dark Roast</div></div>
+          <div class="card"><img src="https://media.giphy.com/media/hPFKu8dKRRNgQ/giphy.gif" alt="Colombian"><div class="label">Colombian</div></div>
+          <div class="card"><img src="https://media.giphy.com/media/hPFKu8dKRRNgQ/giphy.gif" alt="Ethiopian"><div class="label">Ethiopian</div></div>
         </div>
       </div>
-      <button class="carousel-btn next" aria-label="Next slide">&#10095;</button>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- WHY LOCAL -->
-<section class="why-local">
-  <h2>Why Melbourne-first matters</h2>
-  <p>Freshly roasted beans, shorter supply chains, and direct support for local roasters.</p>
-</section>
+  <!-- Why Melbourne -->
+  <section class="why-melbourne">
+    <h2>Why Melbourne-first matters</h2>
+    <p>Fresher beans. Shorter supply chains. Real roasters you can walk to. Less corporate noise.</p>
+  </section>
 
-<!-- PARTNER -->
-<section class="partner">
-  <h2>Partner With Us</h2>
-  <p>Reach the right customers with personalised coffee matching + automated journeys.</p>
-  <a href="#" class="partner-btn">Learn More</a>
-</section>
+  <!-- Partner -->
+  <section class="partner">
+    <h2>Independent roasters — let’s talk</h2>
+    <p>Reach customers who already want what you roast. No wasted ads. Just better matches.</p>
+    <a href="mailto:hello@originespresso.com" class="btn-secondary">Send a message</a>
+  </section>
 
-<footer>
-  <p>&copy; 2025 Origin Espresso</p>
-</footer>
+  <!-- Footer -->
+  <footer>
+    <p>Origin Espresso — Melbourne coffee, done properly.<br>
+    <small>Built with too much caffeine and not enough sleep.</small></p>
+  </footer>
 
-<script>
-// Carousel script (unchanged)
-(function() {
-  const track = document.querySelector('.carousel-track');
-  const prev = document.querySelector('.carousel-btn.prev');
-  const next = document.querySelector('.carousel-btn.next');
-  const windowEl = document.querySelector('.carousel-window');
-  const products = Array.from(track.children);
+  <script>
+    // Greeting
+    (async () => {
+      const el = document.getElementById('greeting');
+      let city = 'your city';
+      try {
+        const r = await fetch('https://ipapi.co/json/');
+        if (r.ok) city = (await r.json()).city || city;
+      } catch {}
+      const h = new Date().getHours();
+      const messages = {
+        night: [`It’s late in ${city}. Decaf exists for a reason.`,`After 6pm in ${city}. Even the moon’s switched to decaf.`,`Nighttime ${city}. Consider sleep. Or decaf.`],
+        morning: [`Morning ${city}. Milk coffees before noon are still allowed.`,`Good morning ${city}. Cappuccino weather.`,`${city} sunrise. Flat white o’clock.`],
+        day: [`Hey ${city}. Your current coffee could probably be better.`,`It’s ${new Date().toLocaleTimeString([], {hour:'numeric'})} in ${city}. Time for an upgrade?`,`${city}, let’s be honest — you deserve better beans.`]
+      };
+      const tips = {
+        night: `Tip: Decaf with oat milk is surprisingly good. Don’t tell anyone.`,
+        morning: `Tip: Italians get upset about milk after 11am. Ignore them.`,
+        day: `Tip: Light roast for filter. Darker for espresso. Simple.`
+      };
+      const group = h >= 18 || h < 5 ? 'night' : h < 12 ? 'morning' : 'day';
+      const msg = messages[group][Math.floor(Math.random() * messages[group].length)];
+      const tip = tips[group];
+      el.innerHTML = `<strong>${msg}</strong><span class="tip">${tip}</span>`;
+    })();
 
-  function itemsPerView() {
-    const w = windowEl.offsetWidth;
-    if (w >= 1024) return 3;
-    if (w >= 700) return 2;
-    return 1;
-  }
+    // Carousel
+    const track = document.querySelector('.carousel-track');
+    const prev = document.querySelector('.carousel-btn.prev');
+    const next = document.querySelector('.carousel-btn.next');
+    let index = 0;
+    let startX = 0;
 
-  let slideIndex = 0;
+    function visibleCards() {
+      return window.innerWidth < 640 ? 1 : window.innerWidth < 1024 ? 2 : 3;
+    }
+    function slide() {
+      const cardW = track.children[0].offsetWidth + 24;
+      track.style.transform = `translateX(${-index * cardW}px)`;
+    }
+    prev.onclick = () => { index = Math.max(0, index - 1); slide(); };
+    next.onclick = () => { index = Math.min(track.children.length - visibleCards(), index + 1); slide(); };
 
-  function update() {
-    const perView = itemsPerView();
-    const shift = slideIndex * windowEl.offsetWidth;
-    track.style.transform = `translateX(-${shift}px)`;
-    prev.disabled = slideIndex <= 0;
-    next.disabled = slideIndex >= Math.ceil(products.length / perView) - 1;
-  }
+    track.parentElement.addEventListener('touchstart', e => startX = e.touches[0].clientX, {passive:true});
+    track.parentElement.addEventListener('touchend', e => {
+      const diff = startX - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 50) diff > 0 ? next.click() : prev.click();
+    });
 
-  function nextSlide() {
-    const perView = itemsPerView();
-    slideIndex = Math.min(slideIndex + 1, Math.ceil(products.length / perView) - 1);
-    update();
-  }
-
-  function prevSlide() {
-    slideIndex = Math.max(slideIndex - 1, 0);
-    update();
-  }
-
-  next.addEventListener('click', nextSlide);
-  prev.addEventListener('click', prevSlide);
-  window.addEventListener('resize', () => {
-    slideIndex = Math.min(slideIndex, Math.ceil(products.length / itemsPerView()) - 1);
-    update();
-  });
-
-  function layoutProducts() {
-    const perView = itemsPerView();
-    const gap = 18;
-    const containerW = windowEl.offsetWidth;
-    const cardW = (containerW - gap * (perView - 1)) / perView;
-    products.forEach(p => p.style.flex = `0 0 ${cardW}px`);
-  }
-
-  window.addEventListener('load', () => { layoutProducts(); update(); });
-  window.addEventListener('resize', () => { layoutProducts(); update(); });
-})();
-</script>
-
+    window.addEventListener('resize', () => { index = Math.min(index, track.children.length - visibleCards()); slide(); });
+    window.addEventListener('load', slide);
+  </script>
 </body>
 </html>
