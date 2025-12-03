@@ -98,30 +98,52 @@
   </footer>
 
   <script>
-    // Greeting
-    (async () => {
-      const el = document.getElementById('greeting');
-      let city = 'your city';
-      try {
-        const r = await fetch('https://ipapi.co/json/');
-        if (r.ok) city = (await r.json()).city || city;
-      } catch {}
-      const h = new Date().getHours();
-      const messages = {
-        night: [`It’s late in ${city}. Decaf exists for a reason.`,`After 6pm in ${city}. Even the moon’s switched to decaf.`,`Nighttime ${city}. Consider sleep. Or decaf.`],
-        morning: [`Morning ${city}. Milk coffees before noon are still allowed.`,`Good morning ${city}. Cappuccino weather.`,`${city} sunrise. Flat white o’clock.`],
-        day: [`Hey ${city}. Your current coffee could probably be better.`,`It’s ${new Date().toLocaleTimeString([], {hour:'numeric'})} in ${city}. Time for an upgrade?`,`${city}, let’s be honest — you deserve better beans.`]
-      };
-      const tips = {
-        night: `Tip: Decaf with oat milk is surprisingly good. Don’t tell anyone.`,
-        morning: `Tip: Italians get upset about milk after 11am. Ignore them.`,
-        day: `Tip: Light roast for filter. Darker for espresso. Simple.`
-      };
-      const group = h >= 18 || h < 5 ? 'night' : h < 12 ? 'morning' : 'day';
-      const msg = messages[group][Math.floor(Math.random() * messages[group].length)];
-      const tip = tips[group];
-      el.innerHTML = `<strong>${msg}</strong><span class="tip">${tip}</span>`;
-    })();
+   // Final greeting — sharp, warm, and genuinely helpful
+(async () => {
+  const el = document.getElementById('greeting');
+  let city = null;
+
+  try {
+    const r = await fetch('https://ipapi.co/json/');
+    if (r.ok) {
+      const data = await r.json();
+      if (data.city) city = data.city;
+    }
+  } catch {}
+
+  const h = new Date().getHours();
+  const time = new Date().toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
+
+  const messages = {
+    night: [
+      `It’s late${city ? ` in ${city}` : ''}. Decaf is calling.`,
+      `After 6pm${city ? ` in ${city}` : ''}. Even the moon runs on decaf.`,
+      `Evening${city ? ` in ${city}` : ''}. Time to switch to decaf?`
+    ],
+    morning: [
+      `Morning${city ? `, ${city}` : ''}. Milk coffees before noon are perfectly fine.`,
+      `Good morning${city ? `, ${city}` : ''}. Cappuccino weather.`,
+      `${city ? `${city} sunrise` : 'Sun’s up'}. Flat white time.`
+    ],
+    day: [
+      `Hey${city ? `, ${city}` : ''}. Ready for better coffee?`,
+      `It’s ${time}${city ? ` in ${city}` : ''}. Your brew could be even better.`,
+      `Good ${h < 12 ? 'morning' : 'afternoon'}${city ? `, ${city}` : ''}. Let’s find your perfect roast.`
+    ]
+  };
+
+  const tips = {
+    night: `Tip: Good decaf + oat milk is surprisingly excellent.`,
+    morning: `Tip: Milk coffees before noon? Completely allowed.`,
+    day: `Tip: Light roast for filter. Darker for espresso. Simple rule.`
+  };
+
+  const group = h >= 18 || h < 5 ? 'night' : h < 12 ? 'morning' : 'day';
+  const msg = messages[group][Math.floor(Math.random() * messages[group].length)];
+  const tip = tips[group];
+
+  el.innerHTML = `<strong>${msg}</strong><span class="tip">${tip}</span>`;
+})();
 
     // Carousel
     const track = document.querySelector('.carousel-track');
