@@ -4,121 +4,152 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Origin Espresso - Better Coffee, Matched</title>
-  <link href="https://fonts.googleapis.com/css2?family=PP+Mori:wght@400;600;800&display=swap" rel="stylesheet">
+
+  <!-- NOTE: PP Mori isn't on Google Fonts. Keep your CSS font stack robust in style.css. -->
   <link rel="stylesheet" href="style.css" />
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>Coffee</text></svg>">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>☕</text></svg>">
 </head>
 <body>
 
 <!-- Top bar -->
 <header class="t-bar">
-  <nav class="nav-left">
-    <a href="#about">About</a>
-    <a href="#shop">Shop</a>
-    <a href="#gifting">Gifting</a>
-    <a href="#subscription">Subscription</a>
+  <nav class="nav-left" aria-label="Primary">
+    <a href="#about">How it works</a>
+    <a href="#shop">Roasts</a>
+    <a href="#why">Why local</a>
+    <a href="#partner">Roasters</a>
   </nav>
-  <a href="index.html" class="logo logo-link">Origin Espresso</a>
+  <a href="index.html" class="logo logo-link" aria-label="Origin Espresso home">Origin Espresso</a>
 </header>
 
   <!-- Greeting -->
   <div id="greeting" class="greeting" aria-live="polite">
-    <strong>Working out what you actually like…</strong>
-    <span class="tip">One moment.</span>
+    <strong>Finding your coffee match…</strong>
+    <span class="tip">No jargon. No account. 60 seconds.</span>
   </div>
 
   <!-- Hero -->
-  <section class="hero">
+  <section class="hero" aria-label="Hero">
     <img src="Assets/23_12_25coffee machine.gif" alt="Pouring coffee" class="hero-img" loading="lazy" />
     <div class="hero-content">
-      <h1>Coffee suited to you</h1>
-      <p class="lede">60-second quiz. Free. No account needed.<br>Beans you'll actually finish — from Melbourne's best roasters.</p>
-      <a href="quiz.html" class="btn-primary">Find my Roast</a>
+      <h1>Stop guessing. Start enjoying your coffee.</h1>
+
+      <p class="lede">
+       Bean recommendations based on how
+        <em>you</em> drink coffee — not confusing labels or expert scores.
+        <br><span class="lede-sub">Free. No account. Retake anytime.</span>
+      </p>
+
+      <div class="hero-cta">
+        <a href="quiz.html" class="btn-primary">Get my recommendations →</a>
+
+      </div>
+
+      <p class="micro-proof">
+        ✅ Under 1 minute &nbsp;&nbsp;•&nbsp;&nbsp; ✅ No signup &nbsp;&nbsp;•&nbsp;&nbsp; ✅ Made for real-world taste
+      </p>
     </div>
   </section>
 
-<section class="how-it-works" id="about">
-  <h2>How it works</h2>
- <div class="tiles">
-  <a href="quiz.html" class="tile">
-    <div class="emoji">Quiz</div>
-    <h3>60-second quiz</h3>
-    <p>Free. No account needed.</p>
-  </a>
-  <a href="quiz.html" class="tile">
-    <div class="emoji">Brain</div>
-    <h3>We match you</h3>
-    <p>Flavour science + real data</p>
-  </a>
-  <a href="quiz.html" class="tile">
-    <div class="emoji">Bean</div>
-    <h3>Perfect beans</h3>
-    <p>From Melbourne's best roasters</p>
-  </a>
-  <a href="quiz.html" class="tile">
-    <div class="emoji">Enjoy</div>
-    <h3>Never waste money again</h3>
-    <p>Beans you'll finish every time</p>
-  </a>
-</div>
-</section>
+  <!-- How it works -->
+  <section class="how-it-works" id="about" aria-label="How it works">
+    <h2>How it works</h2>
 
-  <!-- The Right Coffee Module — 2-column (text left, GIF right) -->
-  <section class="right-coffee">
+    <p class="section-lede">
+      Buying coffee shouldn't feel like a gamble. This quiz cuts through roast jargon and matches you to beans you'll actually want to finish.
+    </p>
+
+    <div class="tiles">
+      <a href="quiz.html" class="tile">
+        <div class="emoji" aria-hidden="true">⏱️</div>
+        <h3>60 seconds</h3>
+        <p>Quick questions. No complicated coffee terms.</p>
+      </a>
+      <a href="quiz.html" class="tile">
+        <div class="emoji" aria-hidden="true">😋</div>
+        <h3>Your taste</h3>
+        <p>Tell us what you like (and what you don't). “Not sure” is allowed.</p>
+      </a>
+      <a href="quiz.html" class="tile">
+        <div class="emoji" aria-hidden="true">🎯</div>
+        <h3>Matched beans</h3>
+        <p>Recommendations that fit your brew style and flavour preferences.</p>
+      </a>
+    <div class="center-cta">
+      <a href="quiz.html" class="btn-primary">Take the quiz →</a>
+      <p class="micro-note">There's no “best” coffee — only what tastes good to you.</p>
+    </div>
+  </section>
+
+  <!-- The Right Coffee Module -->
+  <section class="right-coffee" aria-label="Why it matters">
     <div class="right-coffee-grid">
       <div class="right-coffee-text">
         <h2>The right coffee changes everything</h2>
-        <p>One perfect bag. No guesswork.<br>
-          No half-finished packets. No sign-up required.</p>
-          <br>
-          <a href="quiz.html" class="btn-primary">Find My Roast</a>
+        <p>
+          One great bag feels effortless.<br>
+          No half-finished packets. No “maybe I’ll learn to like it.” Just coffee that fits.
+        </p>
+        <br>
+        <a href="quiz.html" class="btn-primary">Find my coffee match →</a>
       </div>
+
       <div class="right-coffee-gif">
-        <img src="Assets/23_12_25beans.jpg" alt="Slow-motion pour-over coffee brewing" class="coffee-gif" loading="lazy" />
+        <img src="Assets/23_12_25beans.jpg" alt="Coffee beans" class="coffee-gif" loading="lazy" />
       </div>
     </div>
   </section>
 
   <!-- Carousel -->
-  <section class="featured" id="shop">
-    <h2>Roasts we think you'll actually like</h2>
-    <div class="carousel">
-      <button class="carousel-btn prev" aria-label="Previous slide">&larr;</button>
+  <section class="featured" id="shop" aria-label="Featured roasts">
+    <h2>Roasts we think you’ll like</h2>
+    <p class="section-lede">
+      A preview of the kinds of picks you’ll get after the quiz: clear matches, tailored to taste.
+    </p>
+
+    <div class="carousel" role="region" aria-label="Roast carousel">
+      <button class="carousel-btn prev" aria-label="Previous slide" aria-disabled="true">&larr;</button>
       <button class="carousel-btn next" aria-label="Next slide">&rarr;</button>
+
       <div class="carousel-track-container">
         <div class="carousel-track">
-          <div class="card"><img src="Assets/2_12_25_Product2.gif" alt="Espresso"><div class="label">Espresso Blend</div></div>
-          <div class="card"><img src="Assets/2_12_25_Product3.gif" alt="Light"><div class="label">Light Roast</div></div>
-          <div class="card"><img src="Assets/2_12_25_Product1.gif" alt="Medium"><div class="label">Medium Roast</div></div>
-          <div class="card"><img src="Assets/2_12_25_Product4.gif" alt="Dark"><div class="label">Dark Roast</div></div>
-          <div class="card"><img src="https://media.giphy.com/media/hPFKu8dKRRNgQ/giphy.gif" alt="Colombian"><div class="label">Colombian</div></div>
-          <div class="card"><img src="https://media.giphy.com/media/hPFKu8dKRRNgQ/giphy.gif" alt="Ethiopian"><div class="label">Ethiopian</div></div>
+          <div class="card"><img src="Assets/2_12_25_Product2.gif" alt="Espresso blend" loading="lazy"><div class="label">Espresso Blend</div></div>
+          <div class="card"><img src="Assets/2_12_25_Product3.gif" alt="Light roast" loading="lazy"><div class="label">Light Roast</div></div>
+          <div class="card"><img src="Assets/2_12_25_Product1.gif" alt="Medium roast" loading="lazy"><div class="label">Medium Roast</div></div>
+          <div class="card"><img src="Assets/2_12_25_Product4.gif" alt="Dark roast" loading="lazy"><div class="label">Dark Roast</div></div>
+          <div class="card"><img src="https://media.giphy.com/media/hPFKu8dKRRNgQ/giphy.gif" alt="Single origin preview" loading="lazy"><div class="label">Single Origin</div></div>
+          <div class="card"><img src="https://media.giphy.com/media/hPFKu8dKRRNgQ/giphy.gif" alt="Filter friendly preview" loading="lazy"><div class="label">Filter Friendly</div></div>
         </div>
       </div>
     </div>
+
+    <div class="center-cta">
+      <a href="quiz.html" class="btn-primary">Get my recommendations →</a>
+    </div>
   </section>
 
-  <!-- Why Melbourne-first -->
-  <section class="why-melbourne">
-    <h2>Why Melbourne-first matters</h2>
-    <p>Fresher beans. Shorter supply chains. Real roasters you can walk to. Less corporate noise.</p>
+  <!-- Why local -->
+  <section class="why-melbourne" id="why" aria-label="Why local matters">
+    <h2>Why local matters</h2>
+    <p>Fresher beans. Shorter time from roast to cup. More consistency. Less hype.</p>
+    <p class="micro-note">We start Melbourne-first because freshness and quality are easier to control.</p>
   </section>
 
-  <!-- Independent roasters -->
-  <section class="partner">
-    <h2>Independent roasters — let's talk</h2>
-    <p>Reach customers who already want what you roast. No wasted ads. Just better matches.</p>
-    <a href="mailto:hello@originespresso.com" class="btn-secondary">Send a message</a>
+  <!-- Roasters -->
+  <section class="partner" id="partner" aria-label="Roasters">
+    <h2>Are you a roaster?</h2>
+    <p>If you roast in Melbourne and want to be included in matches, send a note — we’re keeping this quality-first.</p>
+    <a href="mailto:hello@originespresso.com" class="btn-secondary">Email us</a>
   </section>
 
   <!-- Footer -->
   <footer>
-    <p>Origin Espresso — Melbourne coffee, done properly.<br>
+    <p>Origin Espresso — Melbourne coffee, done simply.<br>
     <small>Built with too much caffeine and not enough sleep.</small></p>
   </footer>
 
   <script>
-    // Greeting — fixed syntax errors, funny copy preserved
+    // Greeting
     (async () => {
       const el = document.getElementById('greeting');
       let city = null;
@@ -127,11 +158,9 @@
         const r = await fetch('https://ipapi.co/json/');
         if (r.ok) {
           const data = await r.json();
-          if (data.city) city = data.city;
+          if (data && data.city) city = data.city;
         }
-      } catch (error) {
-        // Silently fail
-      }
+      } catch (_) {}
 
       const h = new Date().getHours();
       const time = new Date().toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
@@ -139,35 +168,35 @@
       const messages = {
         night: [
           `It’s late${city ? ` in ${city}` : ''}. Maybe switch to decaf... or embrace the chaos.`,
-          `After 6pm${city ? ` in ${city}` : ''} and still sipping espresso? Bold move. Sleep is a myth anyway.`,
-          `Evening${city ? ` in ${city}` : ''}. Perhaps refrain from your double shot?`
+          `After 6pm${city ? ` in ${city}` : ''} and still sipping espresso? Bold move.`,
+          `Evening${city ? ` in ${city}` : ''}. One more shot won’t hurt... right?`
         ],
         morning: [
-          `Morning${city ? `, ${city}` : ''}. Milk coffees before noon? Even Italians approve.`,
-          `Good morning${city ? `, ${city}` : ''}. It's Cappuccino weather.`,
+          `Morning${city ? `, ${city}` : ''}. Milk coffees before noon? Completely allowed.`,
+          `Good morning${city ? `, ${city}` : ''}. It’s cappuccino weather.`,
           `${city ? `${city} sunrise` : "Sun's up"}. Flat white time.`
         ],
         day: [
           `Hey${city ? `, ${city}` : ''}. Ready for better coffee?`,
-          `It's ${time}${city ? ` in ${city}` : ''}. Your brew could be even better.`,
-          `Good ${h < 12 ? 'morning' : 'afternoon'}${city ? `, ${city}` : ''}. Let's find your perfect roast.`
+          `It’s ${time}${city ? ` in ${city}` : ''}. Your next bag can be way better.`,
+          `Good ${h < 12 ? 'morning' : 'afternoon'}${city ? `, ${city}` : ''}. Let’s find your match.`
         ]
       };
 
       const tips = {
         night: `Tip: Good decaf + oat milk is surprisingly excellent.`,
-        morning: `Tip: Milk coffees before noon? Completely allowed.`,
+        morning: `Tip: If you’re unsure, start medium roast and adjust from there.`,
         day: `Tip: Light roast for filter. Darker for espresso. Simple rule.`
       };
 
-      const group = h >= 18 || h < 5 ? 'night' : h < 12 ? 'morning' : 'day';
+      const group = (h >= 18 || h < 5) ? 'night' : (h < 12 ? 'morning' : 'day');
       const msg = messages[group][Math.floor(Math.random() * messages[group].length)];
       const tip = tips[group];
 
       el.innerHTML = `<strong>${msg}</strong><span class="tip">${tip}</span>`;
     })();
 
-    // Carousel — arrows always visible on mobile
+    // Carousel (improved bounds + aria)
     const track = document.querySelector('.carousel-track');
     const prev = document.querySelector('.carousel-btn.prev');
     const next = document.querySelector('.carousel-btn.next');
@@ -177,20 +206,30 @@
       return window.innerWidth < 640 ? 1 : window.innerWidth < 1024 ? 2 : 3;
     }
 
-    function slide() {
-      const cardW = track.children[0].offsetWidth + 24;
-      track.style.transform = `translateX(${-index * cardW}px)`;
+    function maxIndex() {
+      return Math.max(0, track.children.length - visibleCards());
     }
 
-    prev.onclick = () => { index = Math.max(0, index - 1); slide(); };
-    next.onclick = () => { index = Math.min(track.children.length - visibleCards(), index + 1); slide(); };
+    function updateControls() {
+      prev.setAttribute('aria-disabled', index <= 0 ? 'true' : 'false');
+      next.setAttribute('aria-disabled', index >= maxIndex() ? 'true' : 'false');
+    }
+
+    function slide() {
+      if (!track.children.length) return;
+      index = Math.min(Math.max(index, 0), maxIndex());
+      const cardW = track.children[0].offsetWidth + 24;
+      track.style.transform = `translateX(${-index * cardW}px)`;
+      updateControls();
+    }
+
+    prev.addEventListener('click', () => { index = Math.max(0, index - 1); slide(); });
+    next.addEventListener('click', () => { index = Math.min(maxIndex(), index + 1); slide(); });
 
     // Swipe support
     let startX = 0;
     const container = track.parentElement;
-    container.addEventListener('touchstart', e => {
-      startX = e.touches[0].clientX;
-    }, { passive: true });
+    container.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
     container.addEventListener('touchend', e => {
       const diff = startX - e.changedTouches[0].clientX;
       if (Math.abs(diff) > 50) {
@@ -199,10 +238,7 @@
       }
     });
 
-    window.addEventListener('resize', () => {
-      index = Math.min(index, track.children.length - visibleCards());
-      slide();
-    });
+    window.addEventListener('resize', slide);
     window.addEventListener('load', slide);
   </script>
 </body>
