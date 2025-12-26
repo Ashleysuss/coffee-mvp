@@ -1,52 +1,57 @@
+<!-- =========================
+     index.html (FULL FILE)
+     ========================= -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Origin Espresso - Better Coffee, Matched</title>
+  <title>Brewlio — Coffee, matched to your taste</title>
 
-  <!-- NOTE: PP Mori isn't on Google Fonts. Keep your CSS font stack robust in style.css. -->
   <link rel="stylesheet" href="style.css" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>☕</text></svg>">
 </head>
 <body>
 
-<!-- Top bar -->
-<header class="t-bar">
-  <nav class="nav-left" aria-label="Primary">
-    <a href="#about">How it works</a>
-    <a href="#shop">Roasts</a>
-    <a href="#why">Why local</a>
-    <a href="#partner">Roasters</a>
-  </nav>
-  <a href="index.html" class="logo logo-link" aria-label="Origin Espresso home">Origin Espresso</a>
-</header>
+  <!-- Top bar -->
+  <header class="t-bar">
+    <nav class="nav-left" aria-label="Primary">
+      <a href="#about">How it works</a>
+      <a href="#shop">Roasts</a>
+      <a href="#why">Why local</a>
+      <a href="#partner">Roasters</a>
+    </nav>
+
+    <!-- Text logo (wordmark) -->
+    <a href="index.html" class="logo logo-link" aria-label="Brewlio home">
+      <span class="logo-main">BREWLIO</span>
+      <span class="logo-sub">coffee, matched to your taste</span>
+    </a>
+  </header>
 
   <!-- Greeting -->
   <div id="greeting" class="greeting" aria-live="polite">
-    <strong>Finding your coffee match…</strong>
-    <span class="tip">No jargon. No account. 60 seconds.</span>
+    <strong>Let’s fix your next coffee bag.</strong>
+    <span class="tip">60 seconds. No jargon. No signup.</span>
   </div>
 
   <!-- Hero -->
   <section class="hero" aria-label="Hero">
     <img src="Assets/23_12_25coffee machine.gif" alt="Pouring coffee" class="hero-img" loading="lazy" />
     <div class="hero-content">
-      <h1>Stop guessing. Start enjoying your coffee.</h1>
+      <h1>Find a coffee you’ll actually finish.</h1>
 
       <p class="lede">
-       Bean recommendations based on how
-        <em>you</em> drink coffee — not confusing labels or expert scores.
-        <br><span class="lede-sub">Free. No account. Retake anytime.</span>
+        Tell us how you brew and what you like. We’ll match you to beans that fit.
+        <br><span class="lede-sub">Free. No signup. Retake anytime.</span>
       </p>
 
       <div class="hero-cta">
-        <a href="quiz.html" class="btn-primary">Get my recommendations →</a>
-
+        <a href="quiz.html" class="btn-primary">Get my match →</a>
       </div>
 
       <p class="micro-proof">
-        ✅ Under 1 minute &nbsp;&nbsp;•&nbsp;&nbsp; ✅ No signup &nbsp;&nbsp;•&nbsp;&nbsp; ✅ Made for real-world taste
+        ✅ Under 1 minute &nbsp;&nbsp;•&nbsp;&nbsp; ✅ No signup &nbsp;&nbsp;•&nbsp;&nbsp; ✅ No regret-bags
       </p>
     </div>
   </section>
@@ -56,28 +61,34 @@
     <h2>How it works</h2>
 
     <p class="section-lede">
-      Buying coffee shouldn't feel like a gamble. This quiz cuts through roast jargon and matches you to beans you'll actually want to finish.
+      Buying coffee shouldn’t feel like a gamble.
+      <br>Answer a few quick questions. We’ll do the matching.
     </p>
 
     <div class="tiles">
       <a href="quiz.html" class="tile">
         <div class="emoji" aria-hidden="true">⏱️</div>
         <h3>60 seconds</h3>
-        <p>Quick questions. No complicated coffee terms.</p>
+        <p>Quick questions. Zero coffee-snob energy.</p>
       </a>
+
       <a href="quiz.html" class="tile">
         <div class="emoji" aria-hidden="true">😋</div>
         <h3>Your taste</h3>
-        <p>Tell us what you like (and what you don't). “Not sure” is allowed.</p>
+        <p>Tell us what you like (and what you don’t). “Not sure” counts.</p>
       </a>
+
       <a href="quiz.html" class="tile">
         <div class="emoji" aria-hidden="true">🎯</div>
         <h3>Matched beans</h3>
-        <p>Recommendations that fit your brew style and flavour preferences.</p>
+        <p>We match you to a roast style that fits your taste and your brew.</p>
       </a>
+    </div>
+
+    <!-- CTA is OUTSIDE tiles -->
     <div class="center-cta">
       <a href="quiz.html" class="btn-primary">Take the quiz →</a>
-      <p class="micro-note">There's no “best” coffee — only what tastes good to you.</p>
+      <p class="micro-note">There’s no “best” coffee. Just what you’ll actually like.</p>
     </div>
   </section>
 
@@ -85,13 +96,13 @@
   <section class="right-coffee" aria-label="Why it matters">
     <div class="right-coffee-grid">
       <div class="right-coffee-text">
-        <h2>The right coffee changes everything</h2>
+        <h2>One good bag changes everything</h2>
         <p>
-          One great bag feels effortless.<br>
-          No half-finished packets. No “maybe I’ll learn to like it.” Just coffee that fits.
+          One good bag feels effortless.<br>
+          No half-finished bags. No “I’ll learn to like it.” Just coffee that fits.
         </p>
         <br>
-        <a href="quiz.html" class="btn-primary">Find my coffee match →</a>
+        <a href="quiz.html" class="btn-primary">Find my match →</a>
       </div>
 
       <div class="right-coffee-gif">
@@ -102,9 +113,9 @@
 
   <!-- Carousel -->
   <section class="featured" id="shop" aria-label="Featured roasts">
-    <h2>Roasts we think you’ll like</h2>
+    <h2>Roasts you’ll probably like</h2>
     <p class="section-lede">
-      A preview of the kinds of picks you’ll get after the quiz: clear matches, tailored to taste.
+      A preview of what you’ll get after the quiz: simple matches, based on your taste.
     </p>
 
     <div class="carousel" role="region" aria-label="Roast carousel">
@@ -124,28 +135,28 @@
     </div>
 
     <div class="center-cta">
-      <a href="quiz.html" class="btn-primary">Get my recommendations →</a>
+      <a href="quiz.html" class="btn-primary">Get my match →</a>
     </div>
   </section>
 
   <!-- Why local -->
   <section class="why-melbourne" id="why" aria-label="Why local matters">
     <h2>Why local matters</h2>
-    <p>Fresher beans. Shorter time from roast to cup. More consistency. Less hype.</p>
-    <p class="micro-note">We start Melbourne-first because freshness and quality are easier to control.</p>
+    <p>Fresher beans. Less waiting. More consistency. Less hype.</p>
+    <p class="micro-note">We start Melbourne-first because it’s the easiest way to stay fresh.</p>
   </section>
 
   <!-- Roasters -->
   <section class="partner" id="partner" aria-label="Roasters">
-    <h2>Are you a roaster?</h2>
-    <p>If you roast in Melbourne and want to be included in matches, send a note — we’re keeping this quality-first.</p>
-    <a href="mailto:hello@originespresso.com" class="btn-secondary">Email us</a>
+    <h2>Roaster?</h2>
+    <p>Roast in Melbourne and want in? Send a note. We keep it quality-first.</p>
+    <a href="mailto:hello@brewlio.com" class="btn-secondary">Email us</a>
   </section>
 
   <!-- Footer -->
   <footer>
-    <p>Origin Espresso — Melbourne coffee, done simply.<br>
-    <small>Built with too much caffeine and not enough sleep.</small></p>
+    <p>Brewlio — coffee, matched to your taste.<br>
+    <small>Built with caffeine and a strong dislike for guesswork.</small></p>
   </footer>
 
   <script>
@@ -167,9 +178,9 @@
 
       const messages = {
         night: [
-          `It’s late${city ? ` in ${city}` : ''}. Maybe switch to decaf... or embrace the chaos.`,
+          `It’s late${city ? ` in ${city}` : ''}. Maybe switch to decaf… or embrace the chaos.`,
           `After 6pm${city ? ` in ${city}` : ''} and still sipping espresso? Bold move.`,
-          `Evening${city ? ` in ${city}` : ''}. One more shot won’t hurt... right?`
+          `Evening${city ? ` in ${city}` : ''}. One more shot won’t hurt… right?`
         ],
         morning: [
           `Morning${city ? `, ${city}` : ''}. Milk coffees before noon? Completely allowed.`,

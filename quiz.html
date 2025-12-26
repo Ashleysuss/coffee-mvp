@@ -3,11 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Origin Espresso – Coffee Taste Quiz</title>
+  <title>Brewlio – Coffee Taste Quiz</title>
 
-  <!-- NOTE: PP Mori isn't on Google Fonts. Use system stack in CSS unless you self-host it. -->
   <link rel="stylesheet" href="style.css" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>☕</text></svg>">
+
+  <!-- Supabase client -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
 
@@ -19,7 +21,10 @@
       <a href="index.html#why">Why local</a>
       <a href="index.html#partner">Roasters</a>
     </nav>
-    <a href="index.html" class="logo logo-link" aria-label="Origin Espresso home">Origin Espresso</a>
+    <a href="index.html" class="logo logo-link" aria-label="Brewlio home">
+      <span class="logo-main">BREWLIO</span>
+      <span class="logo-sub">coffee that just makes sense</span>
+    </a>
   </header>
 
   <!-- Greeting -->
@@ -35,7 +40,7 @@
       <div class="quiz-header">
         <h1>Coffee Taste Quiz</h1>
         <p class="quiz-lede">
-          We’ll match you with beans based on your taste + how you drink coffee.
+          We'll match you with beans based on your taste + how you drink coffee.
           <span class="quiz-lede-sub">Free. No account. Retake anytime.</span>
         </p>
 
@@ -212,10 +217,11 @@
           </div>
         </fieldset>
 
+        <!-- Controls -->
         <div class="quiz-controls">
           <button type="button" id="prevBtn" class="quiz-btn secondary" disabled>Previous</button>
           <button type="button" id="nextBtn" class="quiz-btn primary" disabled>Next</button>
-          <button type="submit" id="submitBtn" class="quiz-btn primary" style="display:none;" disabled>Show my match →</button>
+          <button type="submit" id="submitBtn" class="quiz-btn primary hidden" disabled>Show my match →</button>
         </div>
 
         <div class="progress-bar" aria-hidden="true">
@@ -226,9 +232,9 @@
       </form>
 
       <!-- Results -->
-      <div id="results" class="results" style="display:none;">
+      <div id="results" class="results hidden">
         <h2>Your coffee match</h2>
-        <p class="results-lede">Here’s what fits your taste — and why.</p>
+        <p class="results-lede">Here's what fits your taste — and why.</p>
         <div id="recommendation"></div>
 
         <div class="results-actions">
@@ -262,7 +268,41 @@
       el.innerHTML = `<strong>${msg}</strong><span class="tip">No jargon. No account. Just taste.</span>`;
     })();
 
-    // Quiz logic
+    // -------------------- Supabase setup (safe) --------------------
+    const SUPABASE_URL = "YOUR_PROJECT_URL";
+    const SUPABASE_ANON_KEY = "YOUR_ANON_KEY";
+
+    let sb = null;
+    try {
+      const hasRealSupabaseConfig =
+        typeof SUPABASE_URL === "string" &&
+        SUPABASE_URL.startsWith("http") &&
+        SUPABASE_URL.includes("supabase.co") &&
+        typeof SUPABASE_ANON_KEY === "string" &&
+        SUPABASE_ANON_KEY.length > 50;
+
+      if (hasRealSupabaseConfig && window.supabase && typeof window.supabase.createClient === "function") {
+        sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+      }
+    } catch (err) {
+      console.warn("Supabase init failed (quiz still works):", err);
+      sb = null;
+    }
+
+    const safeId = () => {
+      try {
+        if (window.crypto && typeof window.crypto.randomUUID === "function") return window.crypto.randomUUID();
+      } catch (_) {}
+      return "sid_" + Date.now() + "_" + Math.random().toString(16).slice(2);
+    };
+
+    const sessionId = localStorage.getItem("brewlio_sid") || (() => {
+      const id = safeId();
+      localStorage.setItem("brewlio_sid", id);
+      return id;
+    })();
+
+    // -------------------- Quiz logic --------------------
     const form = document.getElementById('coffeeQuiz');
     const questions = Array.from(document.querySelectorAll('.question'));
     const prevBtn = document.getElementById('prevBtn');
@@ -288,10 +328,11 @@
       prevBtn.disabled = currentQuestion === 0;
 
       const last = currentQuestion === total() - 1;
-      nextBtn.style.display = last ? 'none' : 'inline-flex';
-      submitBtn.style.display = last ? 'inline-flex' : 'none';
-
       const answered = isAnswered(currentQuestion);
+
+      nextBtn.classList.toggle('hidden', last);
+      submitBtn.classList.toggle('hidden', !last);
+
       nextBtn.disabled = !answered;
       submitBtn.disabled = !answered;
 
@@ -307,7 +348,7 @@
       questions[n].scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
-    // Enable Next when user picks an option
+    // Enable buttons when user selects an option
     form.addEventListener('change', (e) => {
       if (e.target && e.target.matches('input[type="radio"]')) setButtons();
     });
@@ -378,11 +419,14 @@
       const pick = recs[roast] || recs.medium;
 
       const brewText = (answers.brew || 'brew method').replace('-', ' ');
-      const milkText = answers.milk === 'black' ? 'black' : (answers.milk === 'always' ? 'with milk' : 'either black or with milk');
+      const milkText =
+        answers.milk === 'black'
+          ? 'black'
+          : (answers.milk === 'always' ? 'with milk' : 'either black or with milk');
 
       recommendation.innerHTML = `
         <div class="result-card">
-          <p class="rec-title">We recommend:</p>
+          <p class="rec-title">Your match:</p>
           <h3>${pick.title}</h3>
           <p class="result-line">${pick.line}</p>
 
@@ -396,17 +440,42 @@
         </div>
       `;
 
-      results.style.display = 'block';
-      form.style.display = 'none';
+      // Supabase insert (non-blocking)
+      try {
+        if (sb) {
+          sb.from("quiz_events").insert({
+            created_at: new Date().toISOString(),
+            session_id: sessionId,
+            page: "quiz",
+            answers: answers,
+            result: {
+              roast: roast,
+              style: style,
+              pick_title: pick?.title || null,
+              brew_text: brewText,
+              milk_text: milkText
+            },
+            user_agent: navigator.userAgent,
+            referrer: document.referrer || null
+          }).then(({ error }) => {
+            if (error) console.warn("Supabase insert error:", error);
+          }).catch((err) => console.warn("Supabase insert failed:", err));
+        }
+      } catch (err) {
+        console.warn("Supabase insert crashed (quiz still ok):", err);
+      }
+
+      results.classList.remove('hidden');
+      form.classList.add('hidden');
       results.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
 
     retakeBtn.addEventListener('click', () => {
       form.reset();
-      results.style.display = 'none';
-      form.style.display = 'block';
+      results.classList.add('hidden');
+      form.classList.remove('hidden');
       currentQuestion = 0;
-      showQuestion(currentQuestion);
+      showQuestion(0);
     });
 
     showQuestion(0);
