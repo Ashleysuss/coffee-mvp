@@ -8,15 +8,12 @@
   <meta name="description" content="Brewlio matches you to beans based on your grinder, machine, and taste. No jargon. No signup. About a minute." />
   <link rel="stylesheet" href="style.css" />
 
-  <!-- Inline SVG favicon -->
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>☕</text></svg>">
 
-  <!-- Supabase client (v2) -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
 
-  <!-- Top bar -->
   <header class="t-bar">
     <nav class="nav-left" aria-label="Primary">
       <a href="index.html#about">How it works</a>
@@ -30,13 +27,11 @@
     </a>
   </header>
 
-  <!-- Greeting -->
   <div id="greeting" class="greeting" aria-live="polite">
-    <strong>One minute to better coffee.</strong>
-    <span class="tip">Pick what sounds like you. No jargon. No judgment.</span>
+    <strong>Alright — quick one.</strong>
+    <span class="tip">Pick what sounds like you. No jargon. No account.</span>
   </div>
 
-  <!-- Quiz Section -->
   <section class="quiz-section">
     <div class="quiz-container">
 
@@ -63,28 +58,23 @@
               <img src="Assets/espresso_fallback.jpg" alt="Espresso shot pulling" loading="lazy" />
             </picture>
           </div>
-
           <div class="options" role="radiogroup" aria-label="Brew method">
             <div class="option">
               <input type="radio" id="brew-espresso" name="brew" value="espresso" required>
               <label for="brew-espresso">Espresso machine <span class="muted">(Breville, Gaggia)</span></label>
             </div>
-
             <div class="option">
               <input type="radio" id="brew-manual" name="brew" value="manual">
               <label for="brew-manual">Manual filter <span class="muted">(V60, AeroPress)</span></label>
             </div>
-
             <div class="option">
               <input type="radio" id="brew-batch" name="brew" value="batch">
               <label for="brew-batch">Batch filter <span class="muted">(Moccamaster)</span></label>
             </div>
-
             <div class="option">
               <input type="radio" id="brew-body" name="brew" value="body">
               <label for="brew-body">Immersion / stovetop <span class="muted">(Press, moka)</span></label>
             </div>
-
             <div class="option">
               <input type="radio" id="brew-other" name="brew" value="other">
               <label for="brew-other">Other / instant <span class="muted">(no judgement)</span></label>
@@ -101,34 +91,28 @@
               <img src="Assets/roast_fallback.jpg" alt="Grinding coffee" loading="lazy" />
             </picture>
           </div>
-
           <div class="options" role="radiogroup" aria-label="Grinder tier">
             <div class="option">
               <input type="radio" id="gr-pre" name="grinder" value="pre-ground" required>
               <label for="gr-pre">Pre-ground (or I don’t grind)</label>
             </div>
-
             <div class="option">
               <input type="radio" id="gr-blade" name="grinder" value="blade">
               <label for="gr-blade">Blade grinder <span class="muted">(chaos)</span></label>
             </div>
-
             <div class="option">
               <input type="radio" id="gr-entry" name="grinder" value="burr-entry">
               <label for="gr-entry">Entry burr <span class="muted">(SGP, Encore)</span></label>
             </div>
-
             <div class="option">
               <input type="radio" id="gr-good" name="grinder" value="burr-good">
               <label for="gr-good">Good burr <span class="muted">(DF64, Niche)</span></label>
             </div>
-
             <div class="option">
               <input type="radio" id="gr-pro" name="grinder" value="pro">
               <label for="gr-pro">High-end / commercial <span class="muted">(078/s, EK43)</span></label>
             </div>
           </div>
-
           <p class="micro-note" id="grinderHint" style="margin-top:10px;">
             Hand grinders count — placement depends on brew style.
           </p>
@@ -324,10 +308,9 @@
           </div>
         </fieldset>
 
-        <!-- Controls -->
         <div class="quiz-controls">
           <button type="button" id="prevBtn" class="quiz-btn secondary" disabled>Previous</button>
-          <button type="button" id="nextBtn" class="quiz-btn primary" disabled>Next</button>
+          <button type="button" id="nextBtn" class="quiz-btn primary">Next</button>
           <button type="submit" id="submitBtn" class="quiz-btn primary hidden" disabled>Show my match →</button>
         </div>
 
@@ -338,7 +321,6 @@
         <p id="errorText" class="quiz-error" role="status" aria-live="polite"></p>
       </form>
 
-      <!-- Results -->
       <div id="results" class="results" hidden>
         <h2>Your coffee match</h2>
         <p class="results-lede">Here's what fits your taste — and why.</p>
@@ -384,11 +366,9 @@
       return id;
     })();
 
-    // duration tracking
     let quizStartMs = Date.now();
     const nowMs = () => Date.now();
 
-    // Quiz
     const form = document.getElementById('coffeeQuiz');
     const allQuestions = Array.from(document.querySelectorAll('.question'));
     const prevBtn = document.getElementById('prevBtn');
@@ -430,9 +410,10 @@
 
       const machine = allQuestions.find(q => q.getAttribute('data-q') === 'machine');
       if (machine) {
+        const inputs = machine.querySelectorAll('input[type="radio"]');
         const isActive = activeQuestions.includes(machine);
-        machine.querySelectorAll('input[type="radio"]').forEach(i => i.required = isActive);
-        if (!isActive) machine.querySelectorAll('input[type="radio"]').forEach(i => i.checked = false);
+        inputs.forEach(i => i.required = isActive);
+        if (!isActive) inputs.forEach(i => i.checked = false);
       }
 
       currentIndex = Math.min(currentIndex, activeQuestions.length - 1);
@@ -442,17 +423,16 @@
     function isAnswered(idx) { return !!activeQuestions[idx]?.querySelector('input[type="radio"]:checked'); }
 
     function setButtons() {
+      prevBtn.disabled = currentIndex === 0;
+
       const last = currentIndex === total() - 1;
       const answered = isAnswered(currentIndex);
-
-      prevBtn.disabled = currentIndex === 0;
 
       nextBtn.classList.toggle('hidden', last);
       submitBtn.classList.toggle('hidden', !last);
 
-      // Only enable the visible action
-      nextBtn.disabled = !answered || last;
-      submitBtn.disabled = !answered || !last;
+      nextBtn.disabled = !answered;
+      submitBtn.disabled = !answered;
 
       stepText.textContent = `Question ${currentIndex + 1} of ${total()}`;
       stepHint.textContent = answered ? 'Nice — continue' : 'Pick one to continue';
@@ -464,13 +444,11 @@
 
       errorText.textContent = '';
       progress.style.width = `${((idx + 1) / total()) * 100}%`;
-
-      // Let the checked radio settle before reading it
-      setTimeout(setButtons, 0);
+      setButtons();
       activeQuestions[idx].scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
-    function onQuizInput(e) {
+    form.addEventListener('change', (e) => {
       if (!e.target.matches('input[type="radio"]')) return;
 
       if (e.target.name === 'brew') {
@@ -480,11 +458,8 @@
         showQuestion(currentIndex);
         return;
       }
-      setTimeout(setButtons, 0);
-    }
-
-    form.addEventListener('change', onQuizInput);
-    form.addEventListener('input', onQuizInput);
+      setButtons();
+    });
 
     nextBtn.addEventListener('click', () => {
       if (!isAnswered(currentIndex)) { errorText.textContent = 'Pick an option to continue.'; return; }
@@ -497,31 +472,35 @@
       showQuestion(currentIndex);
     });
 
-    // --- Recommendation helpers ---
+    // Recommendation helpers
     function pickOrigins({ roast, flavour, brew, milk }) {
-      const lightPool = ["Ethiopia", "Kenya", "Rwanda", "Tanzania"];
-      const medSweetPool = ["Brazil", "Colombia", "Guatemala", "El Salvador"];
-      const medCleanPool = ["Colombia", "Rwanda", "Guatemala", "Kenya"];
-      const medDarkPool = ["Brazil", "Guatemala", "Colombia", "Honduras"];
-      const darkPool = ["Brazil", "Indonesia (Sumatra)", "India", "Vietnam"];
+      const pools = {
+        light: ["Ethiopia", "Kenya", "Costa Rica", "Rwanda", "Tanzania"],
+        mediumSweet: ["Brazil", "Colombia", "Guatemala", "El Salvador", "Costa Rica"],
+        mediumClean: ["Colombia", "Costa Rica", "Kenya", "Rwanda", "Guatemala"],
+        mediumDark: ["Brazil", "Colombia", "Guatemala", "Honduras", "Indonesia (Sumatra)"],
+        dark: ["Brazil", "Indonesia (Sumatra)", "India", "Vietnam"]
+      };
 
-      let pool = medSweetPool;
+      let selectedPool = pools.mediumSweet;
 
-      if (roast === 'light') pool = lightPool;
-
-      if (roast === 'medium') {
-        pool = (flavour === 'clean') ? medCleanPool : medSweetPool;
+      if (roast === 'light') selectedPool = pools.light;
+      else if (roast === 'medium-dark') selectedPool = pools.mediumDark;
+      else if (roast === 'dark') selectedPool = pools.dark;
+      else if (roast === 'medium') {
+        if (flavour === 'chocolate' || flavour === 'bold') selectedPool = pools.mediumSweet;
+        else selectedPool = pools.mediumClean;
       }
 
-      if (roast === 'medium-dark') pool = medDarkPool;
-      if (roast === 'dark') pool = darkPool;
-
-      // Espresso + milk tends to shine with sweet/nutty origins even if they picked “clean”
       if (brew === 'espresso' && milk === 'always' && roast !== 'dark') {
-        pool = ["Brazil", "Colombia", "Guatemala", "El Salvador"];
+        selectedPool = pools.mediumSweet;
       }
 
-      return `${pool[0]} or ${pool[1]}`;
+      const shuffled = [...selectedPool].sort(() => 0.5 - Math.random());
+      const origin1 = shuffled[0];
+      const origin2 = shuffled[1] || shuffled[0];
+
+      return `${origin1} or ${origin2}`;
     }
 
     function pushUnique(arr, msg) { if (!arr.includes(msg)) arr.push(msg); }
@@ -550,7 +529,6 @@
         return "richer body with a sweet finish";
       }
 
-      // dark
       if (flavour === 'fruity' || flavour === 'clean') return "roasty comfort (not a fruit salad)";
       return "big, roasty comfort flavours with low acidity";
     }
@@ -602,7 +580,6 @@
           }
         }
 
-        // Obvious mismatches (only show when truly useful)
         if (!roastPrefAny && weakGrinder && roast === 'light') {
           overrideRoast('medium-dark', "Light + inconsistent grind often tastes sharp/sour. Medium-dark is the safer bet.");
         }
@@ -622,7 +599,6 @@
           }
         }
 
-        // Pain-driven nudges (only when it’s a likely pattern)
         if (pain === 'sour' && roast === 'light' && !advancedSkill) {
           overrideRoast('medium', "If sour is the enemy, light roasts can be a trap. Medium is easier to extract sweet.");
         }
@@ -631,24 +607,20 @@
           overrideRoast('medium-dark', "If bitter is the enemy, very dark roasts can be… unhelpful. Medium-dark is usually cleaner.");
         }
 
-        // Espresso/immersion + milk/bold → medium-dark often lands best
         if ((brew === 'espresso' || brew === 'body') && (a.milk === 'always' || a.flavour === 'bold')) {
           if (roast === 'medium') {
             overrideRoast('medium-dark', "Milk + espresso/immersion usually tastes better with a bit more body (medium-dark).");
           }
         }
 
-        // High-end espresso gear: very dark is often flatter than medium-dark (unless they want bold)
         if (roast === 'dark' && brew === 'espresso' && a.milk === 'always' && a.flavour !== 'bold' && highEndGrinder && highEndMachine) {
           overrideRoast('medium-dark', "With strong espresso gear + milk, medium-dark is often sweeter and cleaner than very dark.");
         }
 
-        // Soft notes (stored only; not always shown)
         if (pain === 'weak') pushUnique(softNotes, "If it’s weak, check ratio/dose first — roast helps, but maths helps more.");
         if (pain === 'muddy') pushUnique(softNotes, "Muddy usually means too many fines or too fine a grind.");
         if (pain === 'inconsistent' && weakGrinder) pushUnique(softNotes, "Inconsistency often starts at the grinder. Medium roasts reduce the chaos.");
 
-        // Any-roast: let setup guide (gentle defaults)
         if (roastPrefAny) {
           roast = 'medium';
           if ((brew === 'espresso' || brew === 'body') && a.milk === 'always') roast = 'medium-dark';
@@ -656,22 +628,10 @@
         }
 
         const recs = {
-          light: {
-            title: 'Light Roast',
-            why: 'More origin character, less roast taste. Bright when extracted well.'
-          },
-          medium: {
-            title: 'Medium Roast',
-            why: 'Sweet, forgiving, and works on most setups without drama.'
-          },
-          'medium-dark': {
-            title: 'Medium-Dark Roast',
-            why: 'Syrupy body, great with milk, and generally hard to mess up.'
-          },
-          dark: {
-            title: 'Dark Roast',
-            why: 'Big roast taste, low acidity, very forgiving (if that’s your vibe).'
-          }
+          light: { title: 'Light Roast', why: 'More origin character, less roast taste. Bright when extracted well.' },
+          medium: { title: 'Medium Roast', why: 'Sweet, forgiving, and works on most setups without drama.' },
+          'medium-dark': { title: 'Medium-Dark Roast', why: 'Syrupy body, great with milk, and generally hard to mess up.' },
+          dark: { title: 'Dark Roast', why: 'Big roast taste, low acidity, very forgiving (if that’s your vibe).' }
         };
 
         const pick = recs[roast] || recs.medium;
@@ -718,7 +678,38 @@
           `;
         }
 
-        html += `<p class="small">Coming soon: direct links to Aussie roasters that match this profile.</p></div>`;
+        // Email capture CTA
+        html += `
+          <div class="why-box" style="margin-top:32px; background:#f9f3ed; border:2px solid var(--brand); padding:24px;">
+            <p class="why-title" style="color:var(--brand); margin-bottom:8px; font-size:1.2rem;">Want fresh bags that actually match this?</p>
+            <p style="margin-bottom:20px; font-size:1.05rem;">
+              We’re launching a small weekly drop of beans that fit your exact profile.<br>
+              No spam. One email only when something perfect lands.
+            </p>
+            <form id="emailForm" style="display:flex; gap:12px; flex-wrap:wrap; justify-content:center;">
+              <input 
+                type="email" 
+                id="userEmail" 
+                placeholder="your@email.com" 
+                required 
+                aria-label="Your email address"
+                style="padding:14px 18px; border-radius:16px; border:1px solid #ccc; min-width:260px; font-size:1rem; flex:1;"
+              />
+              <button 
+                type="submit" 
+                class="quiz-btn primary" 
+                style="min-width:160px;"
+              >
+                Send me matches
+              </button>
+            </form>
+            <p style="margin-top:12px; font-size:0.9rem; opacity:0.8;">
+              No junk. Unsubscribe anytime. We hate spam too.
+            </p>
+          </div>
+        `;
+
+        html += `<p class="small" style="margin-top:24px;">Coming soon: direct links to Aussie roasters that match this profile.</p></div>`;
 
         recommendation.innerHTML = html;
 
@@ -726,6 +717,7 @@
         form.hidden = true;
         results.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
+        // Supabase quiz submission
         if (sb) {
           const payload = {
             submission_id: submissionId,
@@ -733,7 +725,6 @@
             page: location.pathname,
             quiz_version: "v2.2",
             duration_ms: durationMs,
-
             brew: brew || null,
             grinder: grinder || null,
             machine: brew === 'espresso' ? (machine || null) : null,
@@ -742,30 +733,53 @@
             roast_pref: a.roast || null,
             skill: skill || null,
             pain: pain || null,
-
             match_roast: roast || null,
             match_style: styleLabel || null,
             match_origins: origins || null,
-
             answers: a,
-            derived: {
-              roast,
-              requestedRoast,
-              roastOverrode: !!requestedRoast && requestedRoast !== roast,
-              styleLabel,
-              displayStyle,
-              origins,
-              brew,
-              grinder,
-              machine,
-              skill,
-              pain,
-              notes: { strong: strongNotes, soft: softNotes }
-            }
+            derived: { roast, styleLabel, origins, brew, grinder, machine, skill, pain, notes: { strong: strongNotes, soft: softNotes } }
           };
 
           const { error } = await sb.from("quiz_events").insert(payload);
           if (error) console.warn("Supabase error:", error);
+        }
+
+        // Email form handler
+        const emailForm = document.getElementById('emailForm');
+        if (emailForm && sb) {
+          emailForm.addEventListener('submit', async (ev) => {
+            ev.preventDefault();
+            const emailInput = document.getElementById('userEmail');
+            const email = emailInput?.value.trim();
+
+            if (!email || !email.includes('@')) {
+              emailInput.style.borderColor = 'var(--brand)';
+              return;
+            }
+
+            const btn = emailForm.querySelector('button[type="submit"]');
+            const origText = btn.textContent;
+            btn.disabled = true;
+            btn.textContent = 'Sending…';
+
+            try {
+              await sb.from('email_signups').insert({
+                email: email,
+                session_id: sessionId,
+                submission_id: submissionId,
+                source: 'quiz_result',
+                created_at: new Date().toISOString()
+              });
+
+              emailForm.innerHTML = `<p style="font-weight:900; color:var(--brand); text-align:center;">Got it — we'll be in touch when something perfect lands.</p>`;
+            } catch (err) {
+              console.warn('Email signup failed:', err);
+              btn.textContent = 'Try again';
+            } finally {
+              btn.disabled = false;
+              if (origText) btn.textContent = origText;
+            }
+          });
         }
 
       } catch (err) {
@@ -786,10 +800,9 @@
       currentIndex = 0;
       rebuildActiveQuestions();
       setGrinderHint(getAnswer('brew') || 'other');
-      showQuestion(0);
+      showQuestion(currentIndex);
     });
 
-    // Init
     rebuildActiveQuestions();
     setGrinderHint(getAnswer('brew') || 'other');
     showQuestion(0);
