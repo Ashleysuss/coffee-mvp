@@ -87,7 +87,7 @@
           <legend>What are you grinding with?</legend>
           <div class="question-gif">
             <picture>
-              <source srcset="https://media.giphy.com/media/3o7TKsQ8l5dQ0JdEw8/giphy.gif" type="image/gif">
+              <source srcset="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExaWdlZGh5M3dyMXBqbjlqY2dhcWhjcWNpNnR6ZTk3MjAwNmpnZ2d2eiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/YlN4W49tpnRduYwY0L/giphy.gif" type="image/gif">
               <img src="Assets/roast_fallback.jpg" alt="Grinding coffee" loading="lazy" />
             </picture>
           </div>
@@ -123,7 +123,7 @@
           <legend>If you make espresso, what machine tier is closest?</legend>
           <div class="question-gif">
             <picture>
-              <source srcset="https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif" type="image/gif">
+              <source srcset="Assets/Question3.gif" type="image/gif">
               <img src="Assets/espresso_fallback.jpg" alt="Espresso machine" loading="lazy" />
             </picture>
           </div>
@@ -181,7 +181,7 @@
           <legend>What flavours do you enjoy?</legend>
           <div class="question-gif">
             <picture>
-              <source srcset="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExNnVtMm80OXQ4MXh2endvMnp4OHd5ZWZ1YzdjN3MzYWhwaGx1NW8zMSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Q6joirtIBHUsw/giphy.gif" type="image/gif">
+              <source srcset="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExdjh6cjVrNGQ3dzJvZ3B6bWs4NnEwNG4zZTZoa210Ymd6bXZvNmtsbCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/4barzGdH1TB4aakAMv/giphy.gif" type="image/gif">
               <img src="Assets/fruity_fallback.jpg" alt="Coffee pour" loading="lazy" />
             </picture>
           </div>
@@ -559,7 +559,6 @@
         let roast = requestedRoast || 'medium';
 
         const strongNotes = [];
-        const softNotes = [];
 
         let styleLabel = 'balanced & sweet';
         if (a.flavour === 'fruity') styleLabel = 'juicy fruit';
@@ -568,10 +567,11 @@
         if (a.flavour === 'balanced') styleLabel = 'balanced & sweet';
         if (a.flavour === 'bold') styleLabel = 'rich & heavy';
 
-        const weakGrinder = ['pre-ground', 'blade', 'burr-entry'].includes(grinder);
-        const advancedSkill = (skill === 'advanced' || skill === 'nerd');
-        const highEndGrinder = (grinder === 'burr-good' || grinder === 'pro');
-        const highEndMachine = (machine === 'advanced' || machine === 'elite');
+        // Capability flags
+        const hasWeakGrinder = ['pre-ground', 'blade', 'burr-entry'].includes(grinder);
+        const hasGoodGrinder = (grinder === 'burr-good' || grinder === 'pro');
+        const hasAdvancedSkill = (skill === 'advanced' || skill === 'nerd');
+        const hasCapableEspresso = brew === 'espresso' && (machine === 'advanced' || machine === 'elite');
 
         function overrideRoast(newRoast, note) {
           if (roast !== newRoast) {
@@ -580,51 +580,63 @@
           }
         }
 
-        if (!roastPrefAny && weakGrinder && roast === 'light') {
-          overrideRoast('medium-dark', "Light + inconsistent grind often tastes sharp/sour. Medium-dark is the safer bet.");
-        }
+        // === REFINED LOGIC: Respect preference + expertise ===
+        if (requestedRoast) {
+          // Weak grinder + light → override
+          if (hasWeakGrinder && roast === 'light') {
+            overrideRoast('medium-dark', "Light roasts need consistent grind. With entry-level grinding, they often taste sour. Medium-dark is more reliable.");
+          }
 
-        if (!roastPrefAny && a.milk === 'always' && roast === 'light') {
-          overrideRoast('medium-dark', "Milk tends to flatten delicate light roasts. Medium-dark keeps sweetness and body.");
-        }
+          // Milk + light → only if not expert setup
+          if (a.milk === 'always' && roast === 'light' && !(hasGoodGrinder && hasAdvancedSkill)) {
+            overrideRoast('medium-dark', "Milk can mask the delicate notes in light roasts. Medium-dark usually gives better body and sweetness with milk.");
+          }
 
-        if ((brew === 'manual' || brew === 'batch') && roast === 'dark') {
-          overrideRoast('medium', "Dark + filter often reads harsh/ashy. Medium keeps sweetness without the bite.");
-        }
+          // Filter + dark → override
+          if ((brew === 'manual' || brew === 'batch') && roast === 'dark') {
+            overrideRoast('medium', "Dark roasts in filter can taste harsh or ashy. Medium keeps sweetness and clarity.");
+          }
 
-        if (brew === 'espresso' && !advancedSkill) {
-          const entryMachine = (machine === 'entry' || machine === 'not-sure');
-          if (entryMachine && roast === 'light') {
-            overrideRoast('medium', "Light espresso on entry machines is hard mode. Medium is much easier to extract evenly.");
+          // Espresso + light on entry machine → only if not skilled
+          if (brew === 'espresso' && roast === 'light') {
+            const entryMachine = (machine === 'entry' || machine === 'not-sure');
+            if (entryMachine && !hasAdvancedSkill) {
+              overrideRoast('medium', "Light roasts on entry machines can be uneven. Medium extracts more consistently.");
+            }
+          }
+
+          // Pain-driven (only if not expert)
+          if (!hasAdvancedSkill) {
+            if (pain === 'sour' && roast === 'light') {
+              overrideRoast('medium', "If sourness bothers you, light roasts can amplify it. Medium is easier to extract sweetly.");
+            }
+            if (pain === 'bitter' && roast === 'dark') {
+              overrideRoast('medium-dark', "If bitter is the enemy, very dark roasts can make it worse. Medium-dark is often cleaner.");
+            }
+          }
+
+          // Muddy pain + weak grinder → nudge away from extremes
+          if (pain === 'muddy' && hasWeakGrinder) {
+            if (roast === 'light') overrideRoast('medium', "Muddy texture often comes from inconsistent grind. Medium roasts are more forgiving.");
+            if (roast === 'dark') overrideRoast('medium-dark', "Very dark with fines can feel muddy. Medium-dark is usually cleaner.");
           }
         }
 
-        if (pain === 'sour' && roast === 'light' && !advancedSkill) {
-          overrideRoast('medium', "If sour is the enemy, light roasts can be a trap. Medium is easier to extract sweet.");
-        }
-
-        if (pain === 'bitter' && roast === 'dark') {
-          overrideRoast('medium-dark', "If bitter is the enemy, very dark roasts can be… unhelpful. Medium-dark is usually cleaner.");
-        }
-
-        if ((brew === 'espresso' || brew === 'body') && (a.milk === 'always' || a.flavour === 'bold')) {
-          if (roast === 'medium') {
-            overrideRoast('medium-dark', "Milk + espresso/immersion usually tastes better with a bit more body (medium-dark).");
+        // Gentle nudges (only if no strong preference)
+        if (!requestedRoast || requestedRoast === 'medium') {
+          if (a.milk === 'always' && (a.flavour === 'bold' || a.flavour === 'chocolate') && (brew === 'espresso' || brew === 'body') && !hasAdvancedSkill) {
+            roast = 'medium-dark';
           }
         }
 
-        if (roast === 'dark' && brew === 'espresso' && a.milk === 'always' && a.flavour !== 'bold' && highEndGrinder && highEndMachine) {
-          overrideRoast('medium-dark', "With strong espresso gear + milk, medium-dark is often sweeter and cleaner than very dark.");
-        }
-
-        if (pain === 'weak') pushUnique(softNotes, "If it’s weak, check ratio/dose first — roast helps, but maths helps more.");
-        if (pain === 'muddy') pushUnique(softNotes, "Muddy usually means too many fines or too fine a grind.");
-        if (pain === 'inconsistent' && weakGrinder) pushUnique(softNotes, "Inconsistency often starts at the grinder. Medium roasts reduce the chaos.");
-
+        // "Any roast" → intelligent default
         if (roastPrefAny) {
           roast = 'medium';
-          if ((brew === 'espresso' || brew === 'body') && a.milk === 'always') roast = 'medium-dark';
-          if ((brew === 'manual' || brew === 'batch') && roast === 'dark') roast = 'medium';
+          if (hasGoodGrinder && hasAdvancedSkill && (a.flavour === 'fruity' || a.flavour === 'clean')) {
+            roast = 'light';
+          } else if ((brew === 'espresso' || brew === 'body') && a.milk === 'always') {
+            roast = 'medium-dark';
+          }
         }
 
         const recs = {
@@ -678,9 +690,9 @@
           `;
         }
 
-        // Email capture CTA
+        // Email capture CTA - added class="cta-panel"
         html += `
-          <div class="why-box" style="margin-top:32px; background:#f9f3ed; border:2px solid var(--brand); padding:24px;">
+          <div class="why-box cta-panel" style="margin-top:32px; padding:24px;">
             <p class="why-title" style="color:var(--brand); margin-bottom:8px; font-size:1.2rem;">Want fresh bags that actually match this?</p>
             <p style="margin-bottom:20px; font-size:1.05rem;">
               We’re launching a small weekly drop of beans that fit your exact profile.<br>
@@ -723,7 +735,7 @@
             submission_id: submissionId,
             session_id: sessionId,
             page: location.pathname,
-            quiz_version: "v2.2",
+            quiz_version: "v2.4",
             duration_ms: durationMs,
             brew: brew || null,
             grinder: grinder || null,
@@ -737,7 +749,7 @@
             match_style: styleLabel || null,
             match_origins: origins || null,
             answers: a,
-            derived: { roast, styleLabel, origins, brew, grinder, machine, skill, pain, notes: { strong: strongNotes, soft: softNotes } }
+            derived: { roast, styleLabel, origins, brew, grinder, machine, skill, pain, notes: { strong: strongNotes } }
           };
 
           const { error } = await sb.from("quiz_events").insert(payload);

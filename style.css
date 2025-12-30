@@ -1,28 +1,89 @@
+/* =========================
+   Brewlio – Full CSS (Updated)
+   Dark mode improvements:
+   - Clear surface layers (bg / card / inset / tile)
+   - Consistent borders + shadows
+   - Better option hover/checked contrast
+   - CTA “blended” panel utility (.cta-panel)
+
+   Revisions (this version):
+   - FIX: --card-bg double-hash typo
+   - NEW: --tile-bg for the 3x tiles (forced #241c15)
+   - NEW: --quiz-card-bg so quiz container != options background
+   ========================= */
+
+/* ---------- Theme tokens ---------- */
 :root {
+  /* Light */
   --bg: #fffaf5;
   --text: #1c110a;
   --muted: #5f3a2a;
+
   --brand: #c41e00;
   --highlight: #ff3400;
+
   --why-bg: #0c0805;
   --partner-bg: #0f0b08;
+
+  --card-bg: #ffffff;          /* general cards */
+  --quiz-card-bg: #ffffff;     /* quiz container bg (kept same in light) */
+  --tile-bg: #ffffff; /* LIGHT MODE tiles */
+
+  --surface-2: #f9f3ed;        /* inset panels */
+  --surface-3: #ffffff;        /* tiles/inputs in light (kept simple) */
+
+  --option-bg: #f9f3ed;
+  --quiz-meta-bg: #f9f3ed;
+  --progress-bg: #eee;
+
+  --border: rgba(28,17,10,0.10);
+  --border-strong: rgba(28,17,10,0.16);
+
+  --shadow: 0 20px 60px rgba(0,0,0,0.10);
+  --shadow-soft: 0 12px 40px rgba(0,0,0,0.09);
+  --shadow-strong: 0 16px 45px rgba(0,0,0,0.14);
 }
 
+/* Dark mode tokens (the big fix) */
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg: #0c0805;
+    --bg: #0a0603;
     --text: #f2e6d9;
     --muted: #b89f8c;
+
     --brand: #e63b1c;
     --highlight: #ff3400;
+
+    --why-bg: #0f0b08;
+    --partner-bg: #120d09;
+    --tile-bg: #241c15; /* DARK MODE tiles */
+
+    /* Surfaces */
+    --card-bg: #241c15;         /* FIXED (was ##241c15) */
+    --quiz-card-bg: #1b1510;    /* NEW: quiz panel bg distinct from options */
+    --tile-bg: #241c15;         /* tiles forced to your requested hex */
+    --surface-2: #1b1510;
+    --surface-3: #241c15;
+
+    --option-bg: var(--surface-3);
+    --quiz-meta-bg: var(--surface-2);
+    --progress-bg: rgba(255,255,255,0.12);
+
+    /* Lines + shadows */
+    --border: rgba(255,255,255,0.08);
+    --border-strong: rgba(255,255,255,0.14);
+
+    --shadow: 0 20px 60px rgba(0,0,0,0.55);
+    --shadow-soft: 0 12px 40px rgba(0,0,0,0.30);
+    --shadow-strong: 0 16px 45px rgba(0,0,0,0.35);
   }
 }
 
+/* ---------- Resets ---------- */
 * { box-sizing: border-box; margin: 0; padding: 0; }
-
-/* ✅ Support both class-based hiding and native HTML hidden attribute */
 .hidden { display: none !important; }
 
+/* ---------- Base ---------- */
 body {
   font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
   background: var(--bg);
@@ -31,14 +92,18 @@ body {
   position: relative;
 }
 
-/* Film grain */
+/* Film grain overlay */
 body::before {
   content: "";
   position: fixed;
   inset: 0;
   pointer-events: none;
   background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="4" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter><rect width="100" height="100" filter="url(%23n)" opacity="0.06"/></svg>');
+  opacity: 0.06;
   z-index: 9999;
+}
+@media (prefers-color-scheme: dark) {
+  body::before { opacity: 0.04; }
 }
 
 /* Focus styles */
@@ -48,7 +113,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, label:focus-visible 
   border-radius: 12px;
 }
 
-/* Top bar */
+/* ---------- Top bar ---------- */
 .t-bar {
   display: flex;
   flex-wrap: wrap;
@@ -94,24 +159,6 @@ a:focus-visible, button:focus-visible, input:focus-visible, label:focus-visible 
   gap: 6px;
 }
 
-.logo-row {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.logo-mark {
-  width: 28px;
-  height: 28px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 10px;
-  background: rgba(255,255,255,0.16);
-  border: 1px solid rgba(255,255,255,0.22);
-  font-size: 16px;
-}
-
 .logo-main {
   font-weight: 950;
   font-size: 1.05rem;
@@ -141,7 +188,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, label:focus-visible 
   .logo { order: 2; align-items: flex-end; }
 }
 
-/* Greeting */
+/* ---------- Greeting ---------- */
 .greeting {
   text-align: center;
   padding: 14px 20px;
@@ -151,7 +198,11 @@ a:focus-visible, button:focus-visible, input:focus-visible, label:focus-visible 
 .greeting strong { display: block; font-weight: 700; margin-bottom: 4px; }
 .tip { display: block; font-size: 13px; color: var(--muted); opacity: 0.9; }
 
-/* Hero */
+@media (prefers-color-scheme: dark) {
+  .greeting { background: rgba(230,59,28,0.12); }
+}
+
+/* ---------- Hero ---------- */
 .hero {
   position: relative;
   height: 70vh;
@@ -207,7 +258,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, label:focus-visible 
   font-weight: 700;
 }
 
-/* Buttons */
+/* ---------- Buttons ---------- */
 .btn-primary {
   background: var(--highlight);
   color: white;
@@ -258,11 +309,14 @@ a:focus-visible, button:focus-visible, input:focus-visible, label:focus-visible 
   padding: 16px 40px;
 }
 
-/* How it works */
+/* ---------- How it works ---------- */
 .how-it-works {
   padding: 100px 20px;
   text-align: center;
   background: #f9f3ed;
+}
+@media (prefers-color-scheme: dark) {
+  .how-it-works { background: var(--partner-bg); }
 }
 .how-it-works h2 {
   font-size: 2.6rem;
@@ -292,16 +346,31 @@ a:focus-visible, button:focus-visible, input:focus-visible, label:focus-visible 
   justify-content: center;
 }
 .tile {
-  background: white;
+  background: var(--tile-bg); /* ✅ changed from --card-bg */
   padding: 2.4rem;
   border-radius: 20px;
   width: 280px;
-  box-shadow: 0 12px 40px rgba(0,0,0,0.09);
+  box-shadow: var(--shadow-soft);
   transition: .3s;
+  border: 1px solid rgba(255,255,255,0.10);
+  color: rgba(255,255,255,0.90);
 }
-.tile:hover { transform: translateY(-10px); }
+.tile h3 { color: rgba(255,255,255,0.95); }
+.tile p { color: rgba(255,255,255,0.74); }
+
+@media (prefers-color-scheme: dark) {
+  .tile { box-shadow: var(--shadow-soft); }
+}
+
+/* refined warm glow */
+.tile:hover {
+  transform: translateY(-10px);
+  box-shadow:
+    0 28px 60px rgba(0,0,0,0.55),
+    inset 0 0 0 1px rgba(255,255,255,0.14);
+}
 .tile:hover .emoji { transform: scale(1.15); }
-.emoji { font-size: 3.4rem; margin-bottom: 1rem; transition: .25s; }
+.emoji { font-size: 3.4rem; margin-bottom: 1rem; transition: .25s; filter: brightness(1.08); }
 
 .tiles a.tile {
   text-decoration: none;
@@ -309,7 +378,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, label:focus-visible 
   display: block;
 }
 
-/* Right Coffee */
+/* ---------- Right Coffee ---------- */
 .right-coffee {
   padding: 140px 40px;
   background: var(--brand);
@@ -357,14 +426,21 @@ a:focus-visible, button:focus-visible, input:focus-visible, label:focus-visible 
   .right-coffee { padding: 100px 30px; }
 }
 
-/* Carousel */
+/* ---------- Carousel ---------- */
 .featured { padding: 90px 20px; background: var(--bg); text-align: center; }
 .featured h2 { margin-bottom: 1rem; font-size: 2.4rem; font-weight: 900; }
 
 .carousel { position: relative; max-width: 1200px; margin: 0 auto; }
 .carousel-track-container { overflow: hidden; border-radius: 16px; }
 .carousel-track { display: flex; gap: 24px; transition: transform .45s ease; padding: 12px 0; }
-.card { flex: 0 0 calc(100% - 24px); border-radius: 16px; overflow: hidden; box-shadow: 0 12px 40px rgba(0,0,0,0.14); position: relative; }
+.card {
+  flex: 0 0 calc(100% - 24px);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: var(--shadow-strong);
+  position: relative;
+  border: 1px solid var(--border);
+}
 .card img { width: 100%; height: 300px; object-fit: cover; display: block; }
 .label {
   position: absolute;
@@ -413,7 +489,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, label:focus-visible 
 @media (min-width: 640px) { .card { flex: 0 0 calc(50% - 24px); } }
 @media (min-width: 1024px) { .card { flex: 0 0 calc(33.333% - 24px); } }
 
-/* Why local */
+/* ---------- Why local ---------- */
 .why-local {
   padding: 110px 20px;
   text-align: center;
@@ -443,7 +519,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, label:focus-visible 
   position: relative;
 }
 
-/* Partner */
+/* ---------- Partner ---------- */
 .partner {
   padding: 110px 20px;
   text-align: center;
@@ -473,7 +549,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, label:focus-visible 
   position: relative;
 }
 
-/* Footer */
+/* ---------- Footer ---------- */
 footer {
   padding: 60px 20px;
   text-align: center;
@@ -487,7 +563,9 @@ footer small {
   font-size: 0.9rem;
 }
 
-/* -------------------- Quiz Page Styles -------------------- */
+/* =======================================================================
+   Quiz Page Styles
+   ======================================================================= */
 .quiz-section {
   padding: 80px 20px;
   min-height: 100vh;
@@ -497,10 +575,20 @@ footer small {
 .quiz-container {
   max-width: 860px;
   margin: 0 auto;
-  background: white;
+  background: var(--quiz-card-bg); /* ✅ changed from --card-bg */
   border-radius: 24px;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+  box-shadow: var(--shadow);
   padding: 60px 40px;
+  border: 1px solid var(--border);
+}
+
+/* subtle separation in dark mode */
+@media (prefers-color-scheme: dark) {
+  .quiz-container {
+    box-shadow:
+      0 22px 65px rgba(0,0,0,0.55),
+      inset 0 0 0 1px rgba(255,255,255,0.06);
+  }
 }
 
 .quiz-header h1 { text-align: center; font-size: 2.6rem; font-weight: 900; }
@@ -522,7 +610,8 @@ footer small {
   max-width: 560px;
   padding: 12px 14px;
   border-radius: 16px;
-  background: #f9f3ed;
+  background: var(--quiz-meta-bg);
+  border: 1px solid var(--border);
 }
 .step-text { font-weight: 900; }
 .step-hint { opacity: 0.85; color: var(--muted); }
@@ -547,6 +636,7 @@ footer small {
   overflow: hidden;
   border-radius: 24px;
   box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+  border: 1px solid var(--border);
 }
 .question-gif picture,
 .question-gif img {
@@ -568,27 +658,46 @@ footer small {
 .option label {
   display: block;
   padding: 18px 24px;
-  background: #f9f3ed;
+  background: var(--option-bg);
   border-radius: 16px;
   cursor: pointer;
   transition: all .25s ease;
   font-size: 1.12rem;
   text-align: center;
-  border: 2px solid transparent;
+  border: 1px solid var(--border);
   user-select: none;
+  color: var(--text);
 }
+
 .option label:hover {
   background: rgba(196,30,0,0.08);
   border-color: rgba(196,30,0,0.25);
   transform: translateY(-4px);
   box-shadow: 0 10px 30px rgba(196,30,0,0.12);
 }
+
+@media (prefers-color-scheme: dark) {
+  .option label:hover {
+    background: color-mix(in oklab, var(--option-bg) 78%, var(--highlight));
+    border-color: color-mix(in oklab, var(--border-strong) 70%, var(--highlight));
+    box-shadow: 0 12px 28px rgba(0,0,0,0.35);
+  }
+}
+
 .option input:checked + label {
   background: var(--brand);
   color: white;
   border-color: rgba(255,255,255,0.35);
   box-shadow: 0 12px 35px rgba(196,30,0,0.28);
   transform: translateY(-2px);
+}
+
+@media (prefers-color-scheme: dark) {
+  .option input:checked + label {
+    background: color-mix(in oklab, var(--highlight) 88%, black);
+    border-color: rgba(255,255,255,0.22);
+    box-shadow: 0 16px 40px rgba(255,52,0,0.18);
+  }
 }
 
 /* Controls */
@@ -615,12 +724,31 @@ footer small {
 }
 
 .quiz-btn.primary { background: var(--highlight); color: white; }
-.quiz-btn.secondary { background: #eee; color: #111; }
+.quiz-btn.secondary {
+  background: #eee;
+  color: #111;
+  border: 1px solid rgba(0,0,0,0.08);
+}
+
+@media (prefers-color-scheme: dark) {
+  .quiz-btn.secondary {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    color: var(--text);
+  }
+}
 
 .quiz-btn:hover:not(:disabled) {
   transform: translateY(-3px);
   box-shadow: 0 10px 25px rgba(255,52,0,0.18);
 }
+@media (prefers-color-scheme: dark) {
+  .quiz-btn.secondary:hover:not(:disabled) {
+    box-shadow: 0 10px 26px rgba(0,0,0,0.35);
+    border-color: var(--border-strong);
+  }
+}
+
 .quiz-btn:disabled {
   opacity: 0.45;
   cursor: not-allowed;
@@ -630,7 +758,7 @@ footer small {
 
 .progress-bar {
   height: 8px;
-  background: #eee;
+  background: var(--progress-bg);
   border-radius: 4px;
   overflow: hidden;
   margin: 1.6rem 0 0.6rem;
@@ -655,12 +783,9 @@ footer small {
   text-align: center;
   margin-top: 1.2rem;
 }
-
-/* If you keep results in the DOM with hidden attribute, don't let it create layout gaps */
 .results[hidden] { display: none !important; }
 
 .results-lede { opacity: 0.85; margin: 10px 0 18px; }
-
 .rec-title { font-size: 1.2rem; opacity: 0.8; margin-bottom: 0.6rem; }
 
 .results h3 {
@@ -669,24 +794,19 @@ footer small {
   line-height: 1.2;
 }
 
-.result-card {
-  background: #f9f3ed;
+.result-card,
+.why-box {
+  background: var(--quiz-meta-bg);
   border-radius: 20px;
   padding: 26px 22px;
-  box-shadow: 0 16px 45px rgba(0,0,0,0.08);
+  box-shadow: var(--shadow-strong);
   max-width: 760px;
-  margin: 0 auto;
+  margin: 0 auto 1.5rem;
+  border: 1px solid var(--border);
 }
 
 .result-line { font-size: 1.12rem; opacity: 0.95; }
 
-.why-box {
-  margin-top: 16px;
-  padding: 16px 16px;
-  border-radius: 16px;
-  background: rgba(255,255,255,0.7);
-  border: 1px solid rgba(28,17,10,0.08);
-}
 .why-title { font-weight: 900; margin-bottom: 6px; }
 .why-meta { margin-top: 10px; opacity: 0.9; }
 
@@ -706,12 +826,48 @@ footer small {
   flex-wrap: wrap;
 }
 
-/* Make the retake button look “buttony” beside the primary */
-.results-actions .btn-secondary {
-  cursor: pointer;
+/* ---------- Inputs (email/text) ---------- */
+input[type="email"], input[type="text"] {
+  width: 100%;
+  max-width: 420px;
+  padding: 14px 16px;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: var(--surface-3);
+  color: var(--text);
+  outline: none;
 }
 
-/* Mobile adjustments */
+input::placeholder {
+  color: color-mix(in oklab, var(--muted) 70%, var(--text));
+  opacity: 0.75;
+}
+
+/* ---------- CTA blended panel utility ----------
+   Apply class="cta-panel" to the results email signup container.
+   If you already have a class, swap .cta-panel for that selector.
+*/
+.cta-panel {
+  background: color-mix(in oklab, var(--highlight) 10%, var(--quiz-meta-bg));
+  border: 1px solid color-mix(in oklab, var(--highlight) 22%, var(--border));
+  border-radius: 20px;
+  padding: 22px;
+  box-shadow: 0 18px 45px rgba(0,0,0,0.12);
+}
+
+@media (prefers-color-scheme: dark) {
+  .cta-panel {
+    box-shadow: 0 18px 45px rgba(0,0,0,0.45);
+  }
+
+  .cta-panel .quiz-btn.primary,
+  .cta-panel .btn-primary {
+    background: color-mix(in oklab, var(--highlight) 92%, black);
+    box-shadow: 0 14px 34px rgba(255,52,0,0.18);
+  }
+}
+
+/* ---------- Mobile adjustments ---------- */
 @media (max-width: 640px) {
   .quiz-container { padding: 40px 20px; border-radius: 20px; }
   .question legend { font-size: 1.55rem; }
@@ -721,4 +877,171 @@ footer small {
   .option label:hover { transform: none; }
   .results-actions { width: 100%; }
   .results-actions a, .results-actions button { width: 100%; }
+}
+/* ===== Tile contrast fix (place at END of style.css) ===== */
+
+/* Make tiles use the tile background token */
+.tile {
+  background: var(--tile-bg) !important;
+}
+
+/* LIGHT MODE: dark text on light tiles */
+@media (prefers-color-scheme: light) {
+  .tile,
+  .tile h3,
+  .tile p {
+    color: #1c110a !important;
+  }
+  .tile p { opacity: 0.9; }
+}
+
+/* DARK MODE: light text on dark tiles */
+@media (prefers-color-scheme: dark) {
+  .tile,
+  .tile h3,
+  .tile p {
+    color: #f2e6d9 !important;
+  }
+  .tile p { opacity: 0.9; }
+}
+/* ======================================================
+   FIX: why-box with inline LIGHT background in dark mode
+   (your email CTA uses inline background:#f9f3ed)
+   ====================================================== */
+
+@media (prefers-color-scheme: dark) {
+
+  /* Target only the "light" why-boxes (inline background) */
+  .why-box[style*="background:#f9f3ed"],
+  .why-box[style*="background: #f9f3ed"],
+  .why-box[style*="background:#fff"],
+  .why-box[style*="background: #fff"],
+  .why-box[style*="background:#ffffff"],
+  .why-box[style*="background: #ffffff"] {
+    color: #1c110a !important;              /* dark text on light bg */
+  }
+
+  /* And force all text inside to follow */
+  .why-box[style*="background:#f9f3ed"] *,
+  .why-box[style*="background: #f9f3ed"] *,
+  .why-box[style*="background:#fff"] *,
+  .why-box[style*="background: #fff"] *,
+  .why-box[style*="background:#ffffff"] *,
+  .why-box[style*="background: #ffffff"] * {
+    color: #1c110a !important;
+  }
+
+  /* Inputs inside that CTA should stay readable too */
+  .why-box[style*="background:#f9f3ed"] input,
+  .why-box[style*="background: #f9f3ed"] input,
+  .why-box[style*="background:#fff"] input,
+  .why-box[style*="background: #fff"] input,
+  .why-box[style*="background:#ffffff"] input,
+  .why-box[style*="background: #ffffff"] input {
+    background: #ffffff !important;
+    color: #1c110a !important;
+    border-color: rgba(28,17,10,0.18) !important;
+  }
+
+  .why-box[style*="background:#f9f3ed"] input::placeholder,
+  .why-box[style*="background: #f9f3ed"] input::placeholder {
+    color: rgba(28,17,10,0.55) !important;
+  }
+}
+/* ======================================================
+   PANEL SPACING & CONSISTENCY SYSTEM
+   Drop-in, non-destructive overrides
+   ====================================================== */
+
+/* ---- Spacing tokens ---- */
+:root {
+  --panel-pad-lg: 32px;
+  --panel-pad-md: 24px;
+
+  --panel-radius-lg: 24px;
+  --panel-radius-md: 20px;
+
+  --panel-gap-lg: 32px;
+  --panel-gap-md: 24px;
+}
+
+/* ======================================================
+   PRIMARY PANELS (main containers)
+   ====================================================== */
+
+/* Quiz container */
+.quiz-container {
+  padding: var(--panel-pad-lg);
+  border-radius: var(--panel-radius-lg);
+}
+
+/* Results cards */
+.result-card,
+.results-actions {
+  margin-top: var(--panel-gap-lg);
+}
+
+/* ======================================================
+   SECONDARY PANELS (cards, tiles, boxes)
+   ====================================================== */
+
+/* Home tiles */
+.tile {
+  padding: var(--panel-pad-md);
+  border-radius: var(--panel-radius-md);
+}
+
+/* Result explanation boxes */
+.why-box {
+  padding: var(--panel-pad-md);
+  border-radius: var(--panel-radius-md);
+  margin-bottom: var(--panel-gap-md);
+}
+
+/* CTA panel inside results */
+.cta-panel {
+  padding: var(--panel-pad-md);
+  border-radius: var(--panel-radius-md);
+  margin-top: var(--panel-gap-lg);
+}
+
+/* ======================================================
+   MEDIA PANELS (GIF / image containers)
+   ====================================================== */
+
+.question-gif {
+  border-radius: var(--panel-radius-lg);
+  margin-bottom: var(--panel-gap-md);
+}
+
+/* ======================================================
+   OPTION GROUPS & STACKING
+   ====================================================== */
+
+.options {
+  gap: var(--panel-gap-md);
+}
+
+.quiz-controls {
+  margin-top: var(--panel-gap-lg);
+}
+
+/* ======================================================
+   MOBILE NORMALISATION
+   ====================================================== */
+
+@media (max-width: 640px) {
+  .quiz-container {
+    padding: 24px;
+  }
+
+  .tile,
+  .why-box,
+  .cta-panel {
+    padding: 20px;
+  }
+
+  .question-gif {
+    margin-bottom: 20px;
+  }
 }
