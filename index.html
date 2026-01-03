@@ -33,10 +33,10 @@
 
   <!-- Hero -->
   <section class="hero" aria-label="Hero">
-    <video class="hero-img" autoplay loop muted playsinline preload="metadata" poster="Assets/hero-fallback.jpg">
+    <video class="hero-img" autoplay loop muted playsinline preload="metadata" poster="Assets/heroimage.jpg">
       <source src="Assets/hero-coffee.webm" type="video/webm">
       <source src="Assets/hero-coffee.mp4" type="video/mp4">
-      <img src="Assets/hero-fallback.jpg" alt="Pouring coffee" loading="lazy" />
+      <img src="Assets/heroimage.jpg" alt="Pouring coffee" loading="lazy" />
     </video>
 
     <div class="hero-content">
@@ -112,32 +112,57 @@
     </div>
   </section>
 
-  <!-- Styles carousel -->
-  <section class="featured" id="styles" aria-label="Coffee styles we match for">
-    <h2>Styles we match for</h2>
-    <p class="section-lede">
-      You won't get a "best coffee" list here. You'll get a style that fits your setup — and what to look for when you buy.
-    </p>
+ <!-- Styles carousel -->
+<section class="featured" id="styles" aria-label="Coffee styles we match for">
+  <h2>Styles we match for</h2>
+  <p class="section-lede">
+    You won't get a "best coffee" list here. You'll get a style that fits your setup — and what to look for when you buy.
+  </p>
 
-    <div class="carousel" role="region" aria-label="Style carousel">
-      <button class="carousel-btn prev" aria-label="Previous slide" aria-disabled="true">&larr;</button>
-      <button class="carousel-btn next" aria-label="Next slide">&rarr;</button>
+  <div class="carousel" aria-label="Coffee styles carousel">
+    <button class="carousel-btn prev" aria-label="Previous slide" type="button">‹</button>
 
-      <div class="carousel-track-container">
-        <div class="carousel-track">
-          <div class="card"><img src="Assets/2_12_25_Product2.gif" alt="Milk-friendly espresso style" loading="lazy"><div class="label">Milk-friendly espresso</div></div>
-          <div class="card"><img src="Assets/2_12_25_Product3.gif" alt="Bright & clean style" loading="lazy"><div class="label">Bright & clean</div></div>
-          <div class="card"><img src="Assets/2_12_25_Product1.gif" alt="Sweet & balanced style" loading="lazy"><div class="label">Sweet & balanced</div></div>
-          <div class="card"><img src="Assets/2_12_25_Product4.gif" alt="Rich & heavy style" loading="lazy"><div class="label">Rich & heavy</div></div>
+    <div class="carousel-track-container">
+      <div class="carousel-track">
+        <div class="card">
+          <video class="card-media" autoplay muted loop playsinline preload="metadata" aria-label="Milk-friendly espresso style">
+            <source src="Assets/comingsoon.mp4" type="video/mp4">
+          </video>
+          <div class="label">Milk-friendly espresso</div>
+        </div>
+
+        <div class="card">
+          <video class="card-media" autoplay muted loop playsinline preload="metadata" aria-label="Bright & clean style">
+            <source src="Assets/comingsoon.mp4" type="video/mp4">
+          </video>
+          <div class="label">Bright & clean</div>
+        </div>
+
+        <div class="card">
+          <video class="card-media" autoplay muted loop playsinline preload="metadata" aria-label="Sweet & balanced style">
+            <source src="Assets/comingsoon.mp4" type="video/mp4">
+          </video>
+          <div class="label">Sweet & balanced</div>
+        </div>
+
+        <div class="card">
+          <video class="card-media" autoplay muted loop playsinline preload="metadata" aria-label="Rich & heavy style">
+            <source src="Assets/comingsoon.mp4" type="video/mp4">
+          </video>
+          <div class="label">Rich & heavy</div>
         </div>
       </div>
     </div>
 
-    <div class="center-cta">
-      <a href="quiz.html" class="btn-primary">See what works for me →</a>
-      <p class="micro-note">Style examples — not specific products.</p>
-    </div>
-  </section>
+    <button class="carousel-btn next" aria-label="Next slide" type="button">›</button>
+  </div>
+
+  <div class="center-cta">
+    <a href="quiz.html" class="btn-primary">See what works for me →</a>
+    <p class="micro-note">Style examples — not specific products.</p>
+  </div>
+</section>
+
 <!-- Split module -->
 <section class="split-module" aria-label="Brewlio matching">
   <div class="split-inner split-reverse">
