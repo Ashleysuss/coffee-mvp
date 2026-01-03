@@ -764,7 +764,7 @@ footer small {
 
 @media (prefers-color-scheme: dark) {
   .quiz-btn.secondary {
-    background: var(--surface-2);
+    background: var(--surface-3);
     border: 1px solid var(--border);
     color: var(--text);
   }
@@ -1210,7 +1210,7 @@ input::placeholder {
   }
 }
 
-/* Media fill: works even if img/video are wrapped */
+/* Media fill (img OR video) */
 .carousel-track-container img,
 .carousel-track-container video{
   width: 100% !important;

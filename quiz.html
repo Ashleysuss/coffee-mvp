@@ -911,43 +911,47 @@
         }
 
         html += `
-          <div class="why-box cta-panel cta-panel--results">
-            <p class="why-title cta-title">Want curated picks for this profile?</p>
-            <p class="cta-copy">
-              We only share coffees from roasters we partner with — and only when they genuinely fit your setup and taste.
-            </p>
+         <div class="why-box cta-panel cta-panel--results">
+  <p class="why-title cta-title">Get matched coffees — only when they actually fit</p>
+  <p class="cta-copy">
+    We’ll email you 1–3 coffees from real roasters that genuinely match this exact profile 
+    — your setup, taste, and deal-breakers included.
+  </p>
 
-            <ul class="note-list" style="margin-top: 10px;">
-              <li>Your profile summary (so you can shop smarter)</li>
-              <li>1–3 matched picks when they’re available</li>
-              <li>Short brew tips for your setup</li>
-            </ul>
+  <ul class="note-list" style="margin: 16px 0 20px;">
+    <li>No random recommendations — only coffees that work for <em>your</em> grinder and brew</li>
+    <li>Save time and money — skip the regret bags</li>
+    <li>Your full profile summary (so you can shop smarter anywhere)</li>
+  </ul>
 
-            <form id="emailForm" class="email-form">
-              <input
-                type="email"
-                id="userEmail"
-                placeholder="your@email.com"
-                required
-                aria-label="Your email address"
-                class="email-input"
-              />
+  <form id="emailForm" class="email-form">
+    <input
+      type="email"
+      id="userEmail"
+      placeholder="your@email.com"
+      required
+      aria-label="Your email address"
+      class="email-input"
+    />
 
-              <select id="buySource" class="email-input" aria-label="Where do you usually buy coffee?">
-                <option value="" selected>Where do you usually buy coffee? (optional)</option>
-                <option value="supermarket">Supermarket</option>
-                <option value="cafe">Cafe</option>
-                <option value="local_roaster">Local roaster</option>
-                <option value="online">Online</option>
-                <option value="subscription">Subscription</option>
-              </select>
+    <select id="buySource" class="email-input" aria-label="Where do you usually buy coffee?">
+      <option value="" selected>Where do you usually buy coffee? (optional)</option>
+      <option value="supermarket">Supermarket</option>
+      <option value="cafe">Cafe / barista</option>
+      <option value="local_roaster">Local roaster</option>
+      <option value="online">Online</option>
+      <option value="subscription">Subscription</option>
+    </select>
 
-              <button type="submit" class="quiz-btn primary email-submit">
-                Notify me
-              </button>
-            </form>
-            <p class="email-footnote">No junk. Unsubscribe anytime.</p>
-          </div>
+    <button type="submit" class="quiz-btn primary email-submit">
+      Send me matches
+    </button>
+  </form>
+
+  <p class="email-footnote">
+    No spam. No daily emails. Unsubscribe anytime with one click.
+  </p>
+</div>
         `;
 
         html += `<p class="results-next small">Pilot mode: you’re getting style guidance today. Partner picks will be added to this profile as we onboard roasters.</p></div>`;
