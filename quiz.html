@@ -11,6 +11,18 @@
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>☕</text></svg>">
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <!-- ✅ PATCH (dark mode bullets): ensures .note-list markers are visible even if global resets exist -->
+  <style>
+    .note-list{
+      list-style: disc;
+      list-style-position: outside;
+      padding-left: 1.25rem;
+      margin: 0.75rem 0 0;
+    }
+    .note-list li{ margin: 0.35rem 0; }
+    .note-list li::marker{ color: var(--text, currentColor); }
+  </style>
 </head>
 <body>
 
@@ -51,11 +63,13 @@
 <fieldset class="question active" data-q="brew">
   <legend>How do you mostly brew your coffee?</legend>
   <div class="question-gif">
-    <video 
-      autoplay 
-      loop 
-      muted 
-      playsinline 
+    <video
+      class="q-video"
+      autoplay
+      loop
+      muted
+      playsinline
+      webkit-playsinline
       poster="Assets/roast_fallback.jpg"
       preload="metadata">
       <source src="Assets/Question1.mp4" type="video/mp4">
@@ -93,11 +107,13 @@
 <fieldset class="question" data-q="grinder">
   <legend>What are you grinding with?</legend>
   <div class="question-gif">
-    <video 
-      autoplay 
-      loop 
-      muted 
-      playsinline 
+    <video
+      class="q-video"
+      autoplay
+      loop
+      muted
+      playsinline
+      webkit-playsinline
       poster="Assets/roast_fallback.jpg"
       preload="metadata">
       <source src="Assets/Question2.mp4" type="video/mp4">
@@ -137,17 +153,19 @@
         <fieldset class="question" data-q="machine" data-conditional="espresso">
           <legend>If you make espresso, which machine tier is closest?</legend>
           <div class="question-gif">
-            <video 
-      autoplay 
-      loop 
-      muted 
-      playsinline 
-      poster="Assets/roast_fallback.jpg"
-      preload="metadata">
-      <source src="Assets/Question3.mp4" type="video/mp4">
-      <img src="Assets/roast_fallback.jpg" alt="Coffee beans pouring">
-    </video>
-  </div>
+            <video
+              class="q-video"
+              autoplay
+              loop
+              muted
+              playsinline
+              webkit-playsinline
+              poster="Assets/roast_fallback.jpg"
+              preload="metadata">
+              <source src="Assets/Question3.mp4" type="video/mp4">
+              <img src="Assets/roast_fallback.jpg" alt="Coffee beans pouring">
+            </video>
+          </div>
 
           <div class="options" role="radiogroup" aria-label="Espresso machine tier">
             <div class="option">
@@ -209,16 +227,18 @@
         <fieldset class="question" data-q="flavour">
           <legend>What flavours do you enjoy most?</legend>
           <div class="question-gif">
-           <video 
-      autoplay 
-      loop 
-      muted 
-      playsinline 
-      poster="Assets/roast_fallback.jpg"
-      preload="metadata">
-      <source src="Assets/Question5.mp4" type="video/mp4">
-      <img src="Assets/roast_fallback.jpg" alt="Coffee beans pouring">
-    </video>
+           <video
+             class="q-video"
+             autoplay
+             loop
+             muted
+             playsinline
+             webkit-playsinline
+             poster="Assets/roast_fallback.jpg"
+             preload="metadata">
+             <source src="Assets/Question5.mp4" type="video/mp4">
+             <img src="Assets/roast_fallback.jpg" alt="Coffee beans pouring">
+           </video>
           </div>
 
           <div class="options" role="radiogroup" aria-label="Flavour preference">
@@ -252,16 +272,18 @@
         <!-- Q6: Roast -->
         <fieldset class="question" data-q="roast">
          <div class="question-gif">
-           <video 
-      autoplay 
-      loop 
-      muted 
-      playsinline 
-      poster="Assets/roast_fallback.jpg"
-      preload="metadata">
-      <source src="Assets/Question6.mp4" type="video/mp4">
-      <img src="Assets/roast_fallback.jpg" alt="Coffee beans pouring">
-    </video>
+           <video
+             class="q-video"
+             autoplay
+             loop
+             muted
+             playsinline
+             webkit-playsinline
+             poster="Assets/roast_fallback.jpg"
+             preload="metadata">
+             <source src="Assets/Question6.mp4" type="video/mp4">
+             <img src="Assets/roast_fallback.jpg" alt="Coffee beans pouring">
+           </video>
           </div>
 
           <div class="options" role="radiogroup" aria-label="Roast preference">
@@ -296,16 +318,18 @@
         <fieldset class="question" data-q="skill">
           <legend>How deep are you into coffee?</legend>
           <div class="question-gif">
-           <video 
-      autoplay 
-      loop 
-      muted 
-      playsinline 
-      poster="Assets/roast_fallback.jpg"
-      preload="metadata">
-      <source src="Assets/Question7.mp4" type="video/mp4">
-      <img src="Assets/roast_fallback.jpg" alt="Coffee beans pouring">
-    </video>
+           <video
+             class="q-video"
+             autoplay
+             loop
+             muted
+             playsinline
+             webkit-playsinline
+             poster="Assets/roast_fallback.jpg"
+             preload="metadata">
+             <source src="Assets/Question7.mp4" type="video/mp4">
+             <img src="Assets/roast_fallback.jpg" alt="Coffee beans pouring">
+           </video>
           </div>
 
           <div class="options" role="radiogroup" aria-label="Skill level">
@@ -340,16 +364,18 @@
         <fieldset class="question" data-q="pain">
           <legend>What ruins a coffee for you?</legend>
           <div class="question-gif">
-              <video 
-      autoplay 
-      loop 
-      muted 
-      playsinline 
-      poster="Assets/roast_fallback.jpg"
-      preload="metadata">
-      <source src="Assets/Question8.mp4" type="video/mp4">
-      <img src="Assets/roast_fallback.jpg" alt="Coffee beans pouring">
-    </video>
+              <video
+                class="q-video"
+                autoplay
+                loop
+                muted
+                playsinline
+                webkit-playsinline
+                poster="Assets/roast_fallback.jpg"
+                preload="metadata">
+                <source src="Assets/Question8.mp4" type="video/mp4">
+                <img src="Assets/roast_fallback.jpg" alt="Coffee beans pouring">
+              </video>
           </div>
 
           <div class="options" role="radiogroup" aria-label="Biggest coffee frustration">
@@ -634,9 +660,30 @@
       stepHint.textContent = answered ? 'Nice — continue' : 'Pick one to continue';
     }
 
+    // ✅ PATCH (mobile video reliability):
+    // pause all question videos, then try to play only the active one.
+    function pauseAllQuestionVideos() {
+      document.querySelectorAll('video.q-video').forEach(v => {
+        try { v.pause(); } catch (e) {}
+      });
+    }
+
+    function playActiveQuestionVideo(activeEl) {
+      const v = activeEl?.querySelector('video.q-video');
+      if (!v) return;
+      try {
+        const p = v.play();
+        if (p && typeof p.catch === 'function') p.catch(() => {});
+      } catch (e) {}
+    }
+
     function showQuestion(idx) {
       allQuestions.forEach(q => q.classList.remove('active'));
       activeQuestions[idx].classList.add('active');
+
+      // ✅ PATCH: play only the active video (helps iOS/Safari)
+      pauseAllQuestionVideos();
+      playActiveQuestionVideo(activeQuestions[idx]);
 
       errorText.textContent = '';
       progress.style.width = `${((idx + 1) / total()) * 100}%`;
@@ -914,7 +961,7 @@
          <div class="why-box cta-panel cta-panel--results">
   <p class="why-title cta-title">Get matched coffees — only when they actually fit</p>
   <p class="cta-copy">
-    We’ll email you 1–3 coffees from real roasters that genuinely match this exact profile 
+    We’ll email you 1–3 coffees from real roasters that genuinely match this exact profile
     — your setup, taste, and deal-breakers included.
   </p>
 
