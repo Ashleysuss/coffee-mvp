@@ -1,24 +1,74 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-AU">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Brewlio — Coffee that just makes sense</title>
 
+  <title>Brewlio — Coffee that just makes sense</title>
   <meta name="description" content="Find coffee that works with your gear, not against it. Equipment-aware matching for espresso, filter, and everything in between. Free, no signup, about a minute." />
+  <meta name="robots" content="index,follow" />
+  <meta name="theme-color" content="#c41e00" />
+
+  <!-- Canonical (adjust if your canonical domain differs) -->
+  <link rel="canonical" href="https://brewlio.com/" />
+
+  <!-- Open Graph -->
+  <meta property="og:site_name" content="Brewlio" />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="en_AU" />
+  <meta property="og:title" content="Brewlio — Coffee that just makes sense" />
+  <meta property="og:description" content="Coffee matched to how you actually drink it. Setup, milk, taste included. Free, no signup, about a minute." />
+  <meta property="og:url" content="https://brewlio.com/" />
+  <meta property="og:image" content="https://brewlio.com/Assets/heroimage.jpg" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Brewlio — Coffee that just makes sense" />
+  <meta name="twitter:description" content="Coffee matched to how you actually drink it. Setup, milk, taste included. Free, no signup, about a minute." />
+  <meta name="twitter:image" content="https://brewlio.com/Assets/heroimage.jpg" />
+
   <link rel="stylesheet" href="style.css" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>☕</text></svg>">
+
+  <!-- Structured data -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Organization",
+    "name":"Brewlio",
+    "url":"https://brewlio.com/",
+    "logo":"https://brewlio.com/Assets/heroimage.jpg",
+    "contactPoint":[{
+      "@type":"ContactPoint",
+      "contactType":"customer support",
+      "email":"hello@brewlio.com"
+    }]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"WebSite",
+    "name":"Brewlio",
+    "url":"https://brewlio.com/"
+  }
+  </script>
 </head>
 <body>
+
+  <!-- Skip link -->
+  <a class="skip-link" href="#main">Skip to content</a>
 
   <!-- Top bar -->
   <header class="t-bar">
     <nav class="nav-left" aria-label="Primary">
-      <a href="index.html#about">How it works</a>
-      <a href="index.html#styles">Styles</a>
-      <a href="index.html#why">Why local</a>
-      <a href="index.html#partner">Roasters</a>
+      <a href="#about">How it works</a>
+      <a href="#styles">Styles</a>
+      <a href="#why">Why local</a>
+      <a href="#partner">Roasters</a>
     </nav>
+
     <a href="index.html" class="logo logo-link" aria-label="Brewlio home">
       <span class="logo-main">BREWLIO</span>
       <span class="logo-sub">coffee that just makes sense</span>
@@ -31,209 +81,245 @@
     <span class="tip">No jargon. No account. About a minute.</span>
   </div>
 
-  <!-- Hero -->
-  <section class="hero" aria-label="Hero">
-    <video class="hero-img" autoplay loop muted playsinline preload="metadata" poster="Assets/heroimage.jpg">
-      <source src="Assets/hero-coffee.webm" type="video/webm">
-      <source src="Assets/hero-coffee.mp4" type="video/mp4">
-      <img src="Assets/heroimage.jpg" alt="Pouring coffee" loading="lazy" />
-    </video>
+  <main id="main">
+    <!-- Hero -->
+    <section class="hero" aria-labelledby="hero-title">
+      <video
+        class="hero-img"
+        autoplay
+        loop
+        muted
+        playsinline
+        preload="metadata"
+        poster="Assets/heroimage.jpg"
+        aria-hidden="true">
+        <source src="Assets/hero-coffee.webm" type="video/webm">
+        <source src="Assets/hero-coffee.mp4" type="video/mp4">
+        <!-- Fallback if video unsupported -->
+        <img src="Assets/heroimage.jpg" alt="" loading="lazy" />
+      </video>
 
-    <div class="hero-content">
-      <h1>Coffee, matched to how you actually drink it.</h1>
+      <div class="hero-content">
+        <h1 id="hero-title">Coffee, matched to how you actually drink it.</h1>
 
-      <p class="lede">
-        We learn your setup, habits, and taste — then guide you to a coffee style that fits.
-        <br><span class="lede-sub">Free. No account. Retake anytime.</span>
-      </p>
-
-      <div class="hero-cta">
-        <a href="quiz.html" class="btn-primary">Find my match →</a>
-      </div>
-
-      <p class="micro-proof">
-        ✅ About a minute &nbsp;&nbsp;•&nbsp;&nbsp; ✅ No signup &nbsp;&nbsp;•&nbsp;&nbsp; ✅ Fewer regret-bags
-      </p>
-    </div>
-  </section>
-
-  <!-- How it works -->
-  <section class="how-it-works" id="about" aria-label="How it works">
-    <h2>How it works</h2>
-
-    <p class="section-lede">
-      Coffee shouldn't feel like a gamble.
-      <br>There's no "best" coffee — only coffee that fits your setup and taste.
-    </p>
-
-    <div class="tiles">
-      <a href="quiz.html" class="tile">
-        <div class="emoji" aria-hidden="true">⏱️</div>
-        <h3>About a minute</h3>
-        <p>Only the questions that matter. Nothing performative.</p>
-      </a>
-
-      <a href="quiz.html" class="tile">
-        <div class="emoji" aria-hidden="true">⚙️</div>
-        <h3>Your setup matters</h3>
-        <p>Grinder, brew method, milk — these change everything.</p>
-      </a>
-
-      <a href="quiz.html" class="tile">
-        <div class="emoji" aria-hidden="true">🎯</div>
-        <h3>Your coffee style</h3>
-        <p>Clear guidance designed for real-world cups you'll actually finish.</p>
-      </a>
-    </div>
-
-    <div class="center-cta">
-      <a href="quiz.html" class="btn-primary">Show me what fits →</a>
-      <p class="micro-note">Clarity over buzzwords. Function over theater.</p>
-    </div>
-  </section>
-
-  <!-- Why it matters -->
-  <section class="right-coffee" aria-label="Why it matters">
-    <div class="right-coffee-grid">
-      <div class="right-coffee-text">
-        <h2>Fewer bad bags. More "this just works."</h2>
-        <p>
-          One great bag feels effortless.<br>
-          No half-finished bags. No "maybe I'll learn to like it."
-          Just coffee that makes sense for you.
+        <p class="lede">
+          We learn your setup, habits, and taste — then guide you to a coffee style that fits.
+          <br><span class="lede-sub">Free. No account. Retake anytime.</span>
         </p>
-        <br>
-        <a href="quiz.html" class="btn-primary">Get my profile →</a>
+
+        <div class="hero-cta">
+          <a href="quiz.html" class="btn-primary">Find my match →</a>
+        </div>
+
+        <p class="micro-proof">
+          <span aria-hidden="true">✅</span> About a minute &nbsp;&nbsp;•&nbsp;&nbsp;
+          <span aria-hidden="true">✅</span> No signup &nbsp;&nbsp;•&nbsp;&nbsp;
+          <span aria-hidden="true">✅</span> Fewer regret-bags
+        </p>
+
+        <noscript>
+          <p class="micro-note" style="margin-top:14px;">
+            JavaScript is off — the quiz needs JavaScript to run.
+          </p>
+        </noscript>
       </div>
+    </section>
 
-      <div class="right-coffee-gif">
-        <img src="Assets/23_12_25beans.jpg" alt="Coffee beans" class="coffee-gif" loading="lazy" />
-      </div>
-    </div>
-  </section>
+    <!-- How it works -->
+    <section class="how-it-works" id="about" aria-labelledby="how-title">
+      <h2 id="how-title">How it works</h2>
 
- <!-- Styles carousel -->
-<section class="featured" id="styles" aria-label="Coffee styles we match for">
-  <h2>Styles we match for</h2>
-  <p class="section-lede">
-    You won't get a "best coffee" list here. You'll get a style that fits your setup — and what to look for when you buy.
-  </p>
-
-  <div class="carousel" aria-label="Coffee styles carousel">
-    <button class="carousel-btn prev" aria-label="Previous slide" type="button">‹</button>
-
-    <div class="carousel-track-container">
-      <div class="carousel-track">
-        <div class="card">
-          <video class="card-media" autoplay muted loop playsinline preload="metadata" aria-label="Milk-friendly espresso style">
-            <source src="Assets/comingsoon.mp4" type="video/mp4">
-          </video>
-          <div class="label">Milk-friendly espresso</div>
-        </div>
-
-        <div class="card">
-          <video class="card-media" autoplay muted loop playsinline preload="metadata" aria-label="Bright & clean style">
-            <source src="Assets/comingsoon.mp4" type="video/mp4">
-          </video>
-          <div class="label">Bright & clean</div>
-        </div>
-
-        <div class="card">
-          <video class="card-media" autoplay muted loop playsinline preload="metadata" aria-label="Sweet & balanced style">
-            <source src="Assets/comingsoon.mp4" type="video/mp4">
-          </video>
-          <div class="label">Sweet & balanced</div>
-        </div>
-
-        <div class="card">
-          <video class="card-media" autoplay muted loop playsinline preload="metadata" aria-label="Rich & heavy style">
-            <source src="Assets/comingsoon.mp4" type="video/mp4">
-          </video>
-          <div class="label">Rich & heavy</div>
-        </div>
-      </div>
-    </div>
-
-    <button class="carousel-btn next" aria-label="Next slide" type="button">›</button>
-  </div>
-
-  <div class="center-cta">
-    <a href="quiz.html" class="btn-primary">See what works for me →</a>
-    <p class="micro-note">Style examples — not specific products.</p>
-  </div>
-</section>
-
-<!-- Split module -->
-<section class="split-module" aria-label="Brewlio matching">
-  <div class="split-inner split-reverse">
-
-    <div class="split-media">
-      <img 
-        src="Assets/v60.jpg"
-        alt="Pour-over coffee being brewed outdoors"
-        loading="lazy"
-      />
-    </div>
-
-    <div class="split-copy">
-      <h2>Built for real-world coffee</h2>
       <p class="section-lede">
-        Brewlio matches you to beans that suit your grinder, brew method, and taste — without the jargon.
+        Coffee shouldn't feel like a gamble.
+        <br>There's no "best" coffee — only coffee that fits your setup and taste.
       </p>
 
-      <div class="split-points">
-        <div class="split-point">
-          <strong>Setup-aware</strong>
-          <span>Grind range + method matters.</span>
-        </div>
-        <div class="split-point">
-          <strong>Clear tastes</strong>
-          <span>Flavours you actually recognise.</span>
-        </div>
-        <div class="split-point">
-          <strong>Fit-first</strong>
-          <span>No pay-to-play recommendations.</span>
-        </div>
+      <div class="tiles" role="list" aria-label="How Brewlio works">
+        <a href="quiz.html" class="tile" role="listitem">
+          <div class="emoji" aria-hidden="true">⏱️</div>
+          <h3>About a minute</h3>
+          <p>Only the questions that matter. Nothing performative.</p>
+        </a>
+
+        <a href="quiz.html" class="tile" role="listitem">
+          <div class="emoji" aria-hidden="true">⚙️</div>
+          <h3>Your setup matters</h3>
+          <p>Grinder, brew method, milk — these change everything.</p>
+        </a>
+
+        <a href="quiz.html" class="tile" role="listitem">
+          <div class="emoji" aria-hidden="true">🎯</div>
+          <h3>Your coffee style</h3>
+          <p>Clear guidance designed for real-world cups you'll actually finish.</p>
+        </a>
       </div>
 
-      <a class="btn-primary" href="quiz.html">Match me →</a>
-    </div>
-  </div>
-</section>
+      <div class="center-cta">
+        <a href="quiz.html" class="btn-primary">Show me what fits →</a>
+        <p class="micro-note">Clarity over buzzwords. Function over theater.</p>
+      </div>
+    </section>
 
+    <!-- Why it matters -->
+    <section class="right-coffee" aria-labelledby="right-title">
+      <div class="right-coffee-grid">
+        <div class="right-coffee-text">
+          <h2 id="right-title">Fewer bad bags. More "this just works."</h2>
+          <p>
+            One great bag feels effortless.<br>
+            No half-finished bags. No "maybe I'll learn to like it."
+            Just coffee that makes sense for you.
+          </p>
+          <br>
+          <a href="quiz.html" class="btn-primary">Get my profile →</a>
+        </div>
 
+        <div class="right-coffee-gif">
+          <img
+            src="Assets/23_12_25beans.jpg"
+            alt="Close-up of coffee beans"
+            class="coffee-gif"
+            loading="lazy"
+            decoding="async" />
+        </div>
+      </div>
+    </section>
 
-  <!-- Why local -->
-  <section class="why-local" id="why" aria-label="Why local matters">
-    <h2>Why local roasters hit different</h2>
-    <p>Your coffee was roasted recently — not months ago. It ships faster, tastes better in real-world setups, and it's easier to trust.</p>
-    <p class="micro-note">We're Australia-first because freshness and consistency matter. Anything else is a compromise.</p>
-  </section>
-  <!-- Roasters -->
-  <section class="partner" id="partner" aria-label="Roasters">
-    <h2>Are you a roaster?</h2>
-    <p>
-      Brewlio matches people to coffee profiles — and we want roasters who genuinely fit those profiles.
-      If your coffees are consistent and you care about repeat drinkers, let's talk.
-    </p>
-    <a href="mailto:hello@brewlio.com" class="btn-secondary">Email us</a>
-    <p class="micro-note">Curated by design. Not pay-to-play. Not a directory.</p>
-  </section>
+    <!-- Styles carousel -->
+    <section class="featured" id="styles" aria-labelledby="styles-title">
+      <h2 id="styles-title">Styles we match for</h2>
+      <p class="section-lede">
+        You won't get a "best coffee" list here. You'll get a style that fits your setup — and what to look for when you buy.
+      </p>
+
+      <div class="carousel" aria-label="Coffee styles carousel">
+        <button class="carousel-btn prev" aria-label="Previous slide" type="button" aria-controls="carouselTrack">‹</button>
+
+        <div class="carousel-track-container">
+          <div class="carousel-track" id="carouselTrack" role="list" aria-label="Coffee style cards">
+            <div class="card" role="listitem" aria-label="Milk-friendly espresso">
+              <video class="card-media" autoplay muted loop playsinline preload="metadata" aria-hidden="true">
+                <source src="Assets/comingsoon.mp4" type="video/mp4">
+              </video>
+              <div class="label">Milk-friendly espresso</div>
+            </div>
+
+            <div class="card" role="listitem" aria-label="Bright & clean">
+              <video class="card-media" autoplay muted loop playsinline preload="metadata" aria-hidden="true">
+                <source src="Assets/comingsoon.mp4" type="video/mp4">
+              </video>
+              <div class="label">Bright & clean</div>
+            </div>
+
+            <div class="card" role="listitem" aria-label="Sweet & balanced">
+              <video class="card-media" autoplay muted loop playsinline preload="metadata" aria-hidden="true">
+                <source src="Assets/comingsoon.mp4" type="video/mp4">
+              </video>
+              <div class="label">Sweet & balanced</div>
+            </div>
+
+            <div class="card" role="listitem" aria-label="Rich & heavy">
+              <video class="card-media" autoplay muted loop playsinline preload="metadata" aria-hidden="true">
+                <source src="Assets/comingsoon.mp4" type="video/mp4">
+              </video>
+              <div class="label">Rich & heavy</div>
+            </div>
+          </div>
+        </div>
+
+        <button class="carousel-btn next" aria-label="Next slide" type="button" aria-controls="carouselTrack">›</button>
+      </div>
+
+      <div class="center-cta">
+        <a href="quiz.html" class="btn-primary">See what works for me →</a>
+        <p class="micro-note">Style examples — not specific products.</p>
+      </div>
+    </section>
+
+    <!-- Split module -->
+    <section class="split-module" aria-labelledby="split-title">
+      <div class="split-inner split-reverse">
+        <div class="split-media">
+          <img
+            src="Assets/v60.jpg"
+            alt="Pour-over coffee being brewed outdoors"
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+
+        <div class="split-copy">
+          <h2 id="split-title">Built for real-world coffee</h2>
+          <p class="section-lede">
+            Brewlio matches you to beans that suit your grinder, brew method, and taste — without the jargon.
+          </p>
+
+          <div class="split-points" role="list" aria-label="Brewlio benefits">
+            <div class="split-point" role="listitem">
+              <strong>Setup-aware</strong>
+              <span>Grind range + method matters.</span>
+            </div>
+            <div class="split-point" role="listitem">
+              <strong>Clear tastes</strong>
+              <span>Flavours you actually recognise.</span>
+            </div>
+            <div class="split-point" role="listitem">
+              <strong>Fit-first</strong>
+              <span>No pay-to-play recommendations.</span>
+            </div>
+          </div>
+
+          <a class="btn-primary" href="quiz.html">Match me →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why local -->
+    <section class="why-local" id="why" aria-labelledby="why-title">
+      <h2 id="why-title">Why local roasters hit different</h2>
+      <p>Your coffee was roasted recently — not months ago. It ships faster, tastes better in real-world setups, and it's easier to trust.</p>
+      <p class="micro-note">We're Australia-first because freshness and consistency matter. Anything else is a compromise.</p>
+    </section>
+
+    <!-- Roasters -->
+    <section class="partner" id="partner" aria-labelledby="partner-title">
+      <h2 id="partner-title">Are you a roaster?</h2>
+      <p>
+        Brewlio matches people to coffee profiles — and we want roasters who genuinely fit those profiles.
+        If your coffees are consistent and you care about repeat drinkers, let's talk.
+      </p>
+      <a href="mailto:hello@brewlio.com" class="btn-secondary">Email us</a>
+      <p class="micro-note">Curated by design. Not pay-to-play. Not a directory.</p>
+    </section>
+  </main>
 
   <!-- Footer -->
   <footer>
     <p>Brewlio — coffee that just makes sense.</p>
     <small>Built to remove regret from buying coffee.</small>
-    
-    <nav style="margin-top:20px;">
+
+    <nav aria-label="Footer" style="margin-top:20px;">
       <a href="mailto:hello@brewlio.com" style="color:#888; margin:0 10px; text-decoration:none;">Contact</a>
       <a href="privacy.html" style="color:#888; margin:0 10px; text-decoration:none;">Privacy</a>
     </nav>
-    
+
     <small style="margin-top:10px; display:block;">Melbourne, Australia</small>
   </footer>
 
   <script>
+    // Respect reduced motion: pause all autoplaying videos
+    (function handleReducedMotion() {
+      const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (!reduce) return;
+      document.querySelectorAll('video').forEach(v => {
+        try {
+          v.pause();
+          v.removeAttribute('autoplay');
+          v.preload = 'none';
+        } catch (e) {}
+      });
+    })();
+
     // Greeting (time-of-day only)
     (() => {
       const el = document.getElementById('greeting');
@@ -270,7 +356,7 @@
       el.innerHTML = `<strong>${msg}</strong><span class="tip">${tip}</span>`;
     })();
 
-    // Carousel (bounds + aria)
+    // Carousel (bounds + aria + disabled buttons + keyboard)
     const track = document.querySelector('.carousel-track');
     const prev = document.querySelector('.carousel-btn.prev');
     const next = document.querySelector('.carousel-btn.next');
@@ -285,8 +371,14 @@
     }
 
     function updateControls() {
-      prev.setAttribute('aria-disabled', index <= 0 ? 'true' : 'false');
-      next.setAttribute('aria-disabled', index >= maxIndex() ? 'true' : 'false');
+      const atStart = index <= 0;
+      const atEnd = index >= maxIndex();
+
+      prev.disabled = atStart;
+      next.disabled = atEnd;
+
+      prev.setAttribute('aria-disabled', atStart ? 'true' : 'false');
+      next.setAttribute('aria-disabled', atEnd ? 'true' : 'false');
     }
 
     function slide() {
@@ -310,6 +402,15 @@
         if (Math.abs(diff) > 50) (diff > 0 ? next : prev)?.click();
       });
     }
+
+    // Keyboard support (Left/Right)
+    document.addEventListener('keydown', (e) => {
+      const tag = (e.target && e.target.tagName) ? e.target.tagName.toLowerCase() : '';
+      if (tag === 'input' || tag === 'textarea' || tag === 'select') return;
+
+      if (e.key === 'ArrowLeft') prev?.click();
+      if (e.key === 'ArrowRight') next?.click();
+    });
 
     window.addEventListener('resize', slide);
     window.addEventListener('load', slide);
